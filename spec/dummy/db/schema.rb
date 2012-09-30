@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120929213617) do
+ActiveRecord::Schema.define(:version => 20120930125253) do
 
   create_table "ecm_cms_folders", :force => true do |t|
     t.string   "basename"
@@ -26,6 +26,32 @@ ActiveRecord::Schema.define(:version => 20120929213617) do
   end
 
   add_index "ecm_cms_folders", ["parent_id"], :name => "index_ecm_cms_folders_on_parent_id"
+
+  create_table "ecm_cms_navigation_items", :force => true do |t|
+    t.string   "name"
+    t.string   "url"
+    t.string   "key"
+    t.string   "options"
+    t.integer  "ecm_cms_navigation_id"
+    t.integer  "parent_id"
+    t.integer  "lft"
+    t.integer  "rgt"
+    t.integer  "depth"
+    t.string   "slug"
+    t.datetime "created_at",            :null => false
+    t.datetime "updated_at",            :null => false
+  end
+
+  add_index "ecm_cms_navigation_items", ["ecm_cms_navigation_id"], :name => "index_ecm_cms_navigation_items_on_ecm_cms_navigation_id"
+  add_index "ecm_cms_navigation_items", ["parent_id"], :name => "index_ecm_cms_navigation_items_on_parent_id"
+
+  create_table "ecm_cms_navigations", :force => true do |t|
+    t.string   "locale"
+    t.string   "name"
+    t.string   "slug"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
 
   create_table "ecm_cms_pages", :force => true do |t|
     t.string   "basename"

@@ -12,6 +12,8 @@ module Ecm
       end
 
       context 'validations' do
+        it { should validate_presence_of :pathname }
+        it { should validate_presence_of :basename }
       end
 
     end
