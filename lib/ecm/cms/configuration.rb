@@ -9,8 +9,11 @@ module Ecm
         yield self
       end
 
-      # mattr_accessor :foo
-      # @@foo = nil
+      mattr_accessor :default_handlers
+      @@default_handlers = {}
+      def default_handlers=(default_handlers)
+        @@default_handlers = HashWithIndifferentAccess.new(default_handlers)
+      end
     end
   end
 end

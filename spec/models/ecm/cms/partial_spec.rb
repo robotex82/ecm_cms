@@ -9,6 +9,16 @@ module Ecm
         it { should belong_to :ecm_cms_folder }
       end
 
+      context 'sets default handler' do
+        subject { Ecm::Cms::Partial.new }
+        its(:handler) { should eq(Ecm::Cms::Configuration.default_handlers[:partial].to_s) }
+      end
+
+      context 'sets default locale' do
+        subject { Ecm::Cms::Partial.new }
+        its(:locale) { should eq(I18n.locale.to_s) }
+      end
+
       context 'validations' do
         it { should validate_presence_of :basename }
         it { should validate_presence_of :pathname }

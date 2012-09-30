@@ -13,6 +13,9 @@ class Ecm::Cms::Template < ActiveRecord::Base
                   :locale,
                   :pathname
 
+  # callbacks
+  after_initialize :set_defaults
+
   # validations
   validates :basename, :presence => true,
                        :uniqueness => { :scope => :ecm_cms_folder_id }
@@ -24,5 +27,14 @@ class Ecm::Cms::Template < ActiveRecord::Base
                      :allow_nil => true,
                      :allow_blank => true
   validates :pathname, :presence => true
+
+  private
+
+  def set_defaults
+    if self.new_record?
+      self.locale  ||= I18n.default_locale.to_s
+      self.handler ||= Ecm::Cms::Configuration.default_handlers[:template].to_s
+    end
+  end
 end
 
