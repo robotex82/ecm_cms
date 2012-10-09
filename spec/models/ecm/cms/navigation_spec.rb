@@ -12,6 +12,7 @@ module Ecm
       context 'validations' do
         it { should validate_presence_of :name }
         it { should validate_uniqueness_of(:name).scoped_to(:locale) }
+        it { should ensure_inclusion_of(:locale).in_array(I18n.available_locales.map(&:to_s)) }
       end
     end
   end

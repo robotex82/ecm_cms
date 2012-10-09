@@ -1,4 +1,6 @@
 class Ecm::Cms::Navigation < ActiveRecord::Base
+  self.table_name = 'ecm_cms_navigations'
+
   # associations
   has_many :ecm_cms_navigation_items,
            :class_name => 'Ecm::Cms::NavigationItem',
@@ -12,7 +14,7 @@ class Ecm::Cms::Navigation < ActiveRecord::Base
 
   # validations
   validates :locale, :inclusion => I18n.available_locales.map(&:to_s),
-                     :if => Proc.new { |n| n.locale.present? }
+                     :allow_nil => true
   validates :name, :presence => true,
                    :uniqueness => { :scope => [ :locale ] }
 end
