@@ -1,4 +1,7 @@
 ActiveAdmin.register Ecm::Cms::Navigation do
+  filter :locale, :as => :select, :collection => I18n.available_locales.map(&:to_s)
+  filter :name
+
   form do |f|
     f.inputs do
       f.input :locale, :as => :select, :collection => I18n.available_locales.map(&:to_s)
@@ -10,8 +13,8 @@ ActiveAdmin.register Ecm::Cms::Navigation do
 
   index do
     selectable_column
-    column :locale
     column :name
+    column :locale    
     default_actions
   end
 

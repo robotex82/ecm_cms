@@ -17,4 +17,8 @@ class Ecm::Cms::Navigation < ActiveRecord::Base
                      :allow_nil => true
   validates :name, :presence => true,
                    :uniqueness => { :scope => [ :locale ] }
+
+  def to_s
+    "#{self.name} (#{self.locale})"
+  end
 end
