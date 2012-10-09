@@ -1,4 +1,8 @@
 Dummy::Application.routes.draw do
+  ActiveAdmin.routes(self)
+
+  devise_for :admin_users, ActiveAdmin::Devise.config
+
   # ECM CMS
   Ecm::Cms::Routing.routes(self)
 

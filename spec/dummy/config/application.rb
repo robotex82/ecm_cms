@@ -9,6 +9,7 @@ require "sprockets/railtie"
 # require "rails/test_unit/railtie"
 
 Bundler.require
+require "active_admin"
 require "ecm_cms"
 
 module Dummy
