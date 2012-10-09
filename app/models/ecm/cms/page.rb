@@ -1,5 +1,5 @@
 class Ecm::Cms::Page < ActiveRecord::Base
-  self.set_table_name 'ecm_cms_pages'
+  self.table_name = 'ecm_cms_pages'
 
   # associations
   belongs_to :ecm_cms_folder,
@@ -9,6 +9,7 @@ class Ecm::Cms::Page < ActiveRecord::Base
   # attributes
   attr_accessible :basename,
                   :body,
+                  :ecm_cms_folder_id,
                   :format,
                   :handler,
                   :layout,
@@ -19,6 +20,8 @@ class Ecm::Cms::Page < ActiveRecord::Base
 
   # callbacks
   after_initialize :set_defaults
+  before_validation :assert_trailing_slash_on_pathname
+  after_save :clear_resolver_cache
 
   # validations
   validates :basename, :presence => true,
@@ -33,7 +36,24 @@ class Ecm::Cms::Page < ActiveRecord::Base
   validates :pathname, :presence => true
   validates :title, :presence => true
 
+  def filename
+    filename = basename
+    filename << ".#{locale}" if locale.present?
+    filename << ".#{format}" if format.present?
+    filename << ".#{handler}" if handler.present?    
+    filename
+  end
+
   private
+
+  def assert_trailing_slash_on_pathname
+    self.pathname = '/' and return if self.pathname.blank?
+    self.pathname << '/' unless self.pathname.end_with?('/')
+  end
+
+  def clear_resolver_cache
+    Ecm::Cms::PageResolver.instance.clear_cache
+  end
 
   def set_defaults
     if self.new_record?

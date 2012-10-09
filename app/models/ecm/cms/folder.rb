@@ -1,4 +1,6 @@
 class Ecm::Cms::Folder < ActiveRecord::Base
+  self.table_name = 'ecm_cms_folders'
+  
   # associations
   has_many :ecm_cms_pages,
            :class_name => 'Ecm::Cms::Page',

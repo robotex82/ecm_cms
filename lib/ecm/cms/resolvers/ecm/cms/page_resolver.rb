@@ -15,8 +15,10 @@ module Ecm
           :format      => normalize_array(details[:formats]).first,
           :handler     => normalize_array(details[:handlers])
         }
-p conditions.inspect
+# p conditions.inspect
         format = conditions.delete(:format)
+        locale = conditions.delete(:locale)
+        
         query  = Ecm::Cms::Page.where(conditions)
 
         # 2) Check for templates with the given format or format is nil
@@ -25,7 +27,13 @@ p conditions.inspect
         # 3) Ensure templates with format come first
         query = query.order("format DESC")
 
-        # 4) Now trigger the query passing on conditions to initialization
+        # 4) Check for templates with the given locale or locale is nil
+        query = query.where(["locale = ? OR locale = ''", locale])
+
+        # 5) Ensure templates with locale come first
+        query = query.order("locale DESC")
+
+        # 6) Now trigger the query passing on conditions to initialization
         query.map do |record|
           initialize_template(record, details)
         end
