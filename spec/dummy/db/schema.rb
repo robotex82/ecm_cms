@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121009140113) do
+ActiveRecord::Schema.define(:version => 20121009230641) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.string   "resource_id",   :null => false
@@ -67,12 +67,13 @@ ActiveRecord::Schema.define(:version => 20121009140113) do
     t.string   "options"
     t.integer  "ecm_cms_navigation_id"
     t.integer  "parent_id"
+    t.integer  "children_count",        :default => 0, :null => false
     t.integer  "lft"
     t.integer  "rgt"
     t.integer  "depth"
     t.string   "slug"
-    t.datetime "created_at",            :null => false
-    t.datetime "updated_at",            :null => false
+    t.datetime "created_at",                           :null => false
+    t.datetime "updated_at",                           :null => false
   end
 
   add_index "ecm_cms_navigation_items", ["ecm_cms_navigation_id"], :name => "index_ecm_cms_navigation_items_on_ecm_cms_navigation_id"

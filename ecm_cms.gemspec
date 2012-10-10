@@ -16,7 +16,9 @@ Gem::Specification.new do |s|
   s.files = Dir["{app,config,db,lib}/**/*"] + ["MIT-LICENSE", "Rakefile", "README.rdoc"]
 
   s.add_dependency "rails", "~> 3.2.8"
+  s.add_dependency "awesome_nested_set"
 
+  # Development Database
   s.add_development_dependency "sqlite3"
 
   # Development Server
@@ -42,7 +44,8 @@ Gem::Specification.new do |s|
 
   # Test automation
   s.add_development_dependency 'rb-inotify', '~> 0.8.8'
-  # s.add_development_dependency 'guard-rails' # See gemfile for a patched version, for engine support.
+  # See gemfile for a patched version, for engine support.
+  # s.add_development_dependency 'guard-rails'
   s.add_development_dependency 'guard-rspec'
   s.add_development_dependency 'guard-bundler'
 end

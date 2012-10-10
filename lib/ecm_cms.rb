@@ -1,3 +1,5 @@
+require 'awesome_nested_set'
+
 require 'ecm/cms/engine'
 require 'ecm/cms/configuration'
 require 'ecm/cms/routing'
