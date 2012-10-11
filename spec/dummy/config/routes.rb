@@ -3,9 +3,13 @@ Dummy::Application.routes.draw do
 
   devise_for :admin_users, ActiveAdmin::Devise.config
 
-  # ECM CMS
-  Ecm::Cms::Routing.routes(self)
-
+  localized(I18n.available_locales) do
+    scope "/:i18n_locale", :constraints => {:i18n_locale => /#{I18n.available_locales.join('|')}/} do 
+    # ECM CMS
+    Ecm::Cms::Routing.routes(self)
+    end  
+  end  
+  match "/", :to => redirect("/#{I18n.locale}")
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

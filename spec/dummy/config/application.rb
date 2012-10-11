@@ -10,6 +10,7 @@ require "sprockets/railtie"
 
 Bundler.require
 require "active_admin"
+require "twitter-bootstrap-rails"
 require "ecm_cms"
 
 module Dummy

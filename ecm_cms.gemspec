@@ -17,7 +17,9 @@ Gem::Specification.new do |s|
 
   s.add_dependency "rails", "~> 3.2.8"
   s.add_dependency "awesome_nested_set"
+  s.add_dependency "i18n_routing"
   s.add_dependency "simple-navigation"
+  s.add_dependency "simple-navigation-bootstrap"
 
   # Development Database
   s.add_development_dependency "sqlite3"
@@ -28,10 +30,11 @@ Gem::Specification.new do |s|
   # Documentation
   s.add_development_dependency "yard"
 
-  # Active admin
+  # Dummy app
   s.add_development_dependency 'activeadmin'
   s.add_development_dependency 'sass-rails'
   s.add_development_dependency 'coffee-rails'
+  s.add_development_dependency "twitter-bootstrap-rails"
 
   # Tests
   s.add_development_dependency 'capybara'

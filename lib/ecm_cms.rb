@@ -1,5 +1,8 @@
 require 'awesome_nested_set'
+require 'i18n_routing'
+require 'rails_tools/i18n_controller'
 require 'simple-navigation'
+require 'simple-navigation-bootstrap'
 
 require 'ecm/cms/engine'
 require 'ecm/cms/configuration'

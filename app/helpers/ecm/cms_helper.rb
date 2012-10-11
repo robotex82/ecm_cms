@@ -1,5 +1,6 @@
 module Ecm::CmsHelper
   def cms_render_navigation(name, options = {})
+    options.reverse_merge! :renderer => :bootstrap, :expand_all => true
     navigation = Ecm::Cms::Navigation.where(:name => name.to_s, :locale => I18n.locale.to_s).first
 
     return I18n.t('ecm.cms.navigation.messages.not_found', {:lang => I18n.locale.to_s, :name => name.to_s}) unless navigation
@@ -10,6 +11,8 @@ module Ecm::CmsHelper
     end
 
     return I18n.t('ecm.cms.navigation.messages.empty', :lang => I18n.locale.to_s, :name => name) if options[:items].empty?
+    options[:items].first[:options] = {} if options[:items].first[:options].nil?
+    options[:items].first[:options].reverse_merge! :container_class => 'nav nav-pills'
     render_navigation(options)
   end
 
