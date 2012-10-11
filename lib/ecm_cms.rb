@@ -1,4 +1,5 @@
 require 'awesome_nested_set'
+require 'simple-navigation'
 
 require 'ecm/cms/engine'
 require 'ecm/cms/configuration'

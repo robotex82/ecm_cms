@@ -16,6 +16,10 @@ module Ecm
           page.save
           page.pathname.should eq('bar/')
         end
+
+        it "updates associated navigation items when the basename changes" # do
+#          page = FactoryGirl.build :ecm_cms_page, :pathname => 'bar'
+#        end
       end
 
       context 'sets default handler' do

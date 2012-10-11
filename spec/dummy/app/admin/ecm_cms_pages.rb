@@ -14,6 +14,10 @@ ActiveAdmin.register Ecm::Cms::Page do
       f.input :handler
     end
 
+    f.inputs do
+      f.input :ecm_cms_navigation_items
+    end
+
     f.actions
   end
 
@@ -23,6 +27,7 @@ ActiveAdmin.register Ecm::Cms::Page do
     column :filename
     column :title
     column :layout
+    column :ecm_cms_navigation_items
     column :created_at
     column :updated_at
     default_actions

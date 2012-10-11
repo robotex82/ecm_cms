@@ -17,6 +17,7 @@ Gem::Specification.new do |s|
 
   s.add_dependency "rails", "~> 3.2.8"
   s.add_dependency "awesome_nested_set"
+  s.add_dependency "simple-navigation"
 
   # Development Database
   s.add_development_dependency "sqlite3"
