@@ -5,6 +5,10 @@ class Ecm::Cms::Page < ActiveRecord::Base
   belongs_to :ecm_cms_folder,
              :class_name => 'Ecm::Cms::Folder',
              :foreign_key => 'ecm_cms_folder_id'
+  has_many :ecm_cms_navigation_items,
+           :class_name => 'Ecm::Cms::NavigationItem',
+           :dependent => :nullify,
+           :foreign_key => 'ecm_cms_page_id'
 
   # attributes
   attr_accessible :basename,
@@ -25,7 +29,7 @@ class Ecm::Cms::Page < ActiveRecord::Base
 
   # validations
   validates :basename, :presence => true,
-                       :uniqueness => { :scope => :ecm_cms_folder_id }
+                       :uniqueness => { :scope => [:ecm_cms_folder_id , :locale] }
   validates :handler, :inclusion => ActionView::Template::Handlers.extensions.map(&:to_s)
   validates :locale, :inclusion => I18n.available_locales.map(&:to_s),
                      :allow_nil => true,
@@ -40,7 +44,7 @@ class Ecm::Cms::Page < ActiveRecord::Base
     filename = basename
     filename << ".#{locale}" if locale.present?
     filename << ".#{format}" if format.present?
-    filename << ".#{handler}" if handler.present?    
+    filename << ".#{handler}" if handler.present?
     filename
   end
 

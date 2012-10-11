@@ -9,6 +9,7 @@ class CreateEcmCmsNavigationItems < ActiveRecord::Migration
 
       # associations
       t.references :ecm_cms_navigation
+      t.references :ecm_cms_page
 
       # awesome nested set
       t.references :parent

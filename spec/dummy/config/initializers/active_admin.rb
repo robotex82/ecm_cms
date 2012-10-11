@@ -1,3 +1,6 @@
+I18n.available_locales = [:de, :en]
+I18n.default_locale = :de
+
 ActiveAdmin.setup do |config|
 
   # == Site Title
@@ -10,7 +13,7 @@ ActiveAdmin.setup do |config|
   # Set the link url for the title. For example, to take
   # users to your main site. Defaults to no link.
   #
-  # config.site_title_link = "/"
+  config.site_title_link = "/#{I18n.locale}"
 
   # Set an optional image to be displayed for the header
   # instead of a string (overrides :site_title)
@@ -124,7 +127,9 @@ ActiveAdmin.setup do |config|
   # Active Admin resources from here.
   #
   # config.before_filter :do_something_awesome
-
+  config.before_filter do
+    I18n.locale = params[:i18n_locale]
+  end
 
   # == Register Stylesheets & Javascripts
   #

@@ -66,6 +66,7 @@ ActiveRecord::Schema.define(:version => 20121009230641) do
     t.string   "key"
     t.string   "options"
     t.integer  "ecm_cms_navigation_id"
+    t.integer  "ecm_cms_page_id"
     t.integer  "parent_id"
     t.integer  "children_count",        :default => 0, :null => false
     t.integer  "lft"

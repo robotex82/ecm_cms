@@ -7,6 +7,7 @@ module Ecm
 
       context 'associations' do
         it { should belong_to :ecm_cms_navigation }
+        it { should belong_to :ecm_cms_page }        
       end
 
       context 'callbacks' do
@@ -33,6 +34,18 @@ module Ecm
 #            foo.save!
 #            bar.ecm_cms_navigation.should == n2
 #          end
+        end
+
+        context "#update_url_form_page" do
+          it "should set the url from page if url is blank and page is present" do
+            basename = 'about-us'
+            locale = 'en'
+            page = FactoryGirl.build :ecm_cms_page, :basename => basename, :locale => locale
+            ni = FactoryGirl.build :ecm_cms_navigation_item, :url => nil, :ecm_cms_page => page
+            
+            ni.valid?
+            ni.url.should eq('/en/about-us')
+          end
         end
       end
 
