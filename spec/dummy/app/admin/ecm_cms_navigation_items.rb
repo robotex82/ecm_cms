@@ -19,8 +19,9 @@ ActiveAdmin.register Ecm::Cms::NavigationItem do
     f.actions
   end
 
-  index do
+  index :as => :nested_set do
     selectable_column
+    column :ecm_cms_navigation
     column :name
     column :url
     column :ecm_cms_page

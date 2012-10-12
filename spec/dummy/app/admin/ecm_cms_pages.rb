@@ -9,14 +9,34 @@ ActiveAdmin.register Ecm::Cms::Page do
     f.inputs do
       f.input :pathname
       f.input :basename
-      f.input :locale
-      f.input :format
-      f.input :handler
+      f.input :locale, :as => :select, :collection => I18n.available_locales.map(&:to_s)
+      f.input :format, :as => :select, :collection => Mime::SET.symbols.map(&:to_s)
+      f.input :handler, :as => :select, :collection => ActionView::Template::Handlers.extensions.map(&:to_s)
     end
 
-    f.inputs do
-      f.input :ecm_cms_navigation_items
+    I18n.available_locales.each do |locale|
+      Ecm::Cms::Navigation.where(:locale => locale).all.each do |navigation|
+        f.inputs do
+          f.input :ecm_cms_navigation_items, 
+                  :as => :check_boxes, 
+                  :collection => navigation.ecm_cms_navigation_items.joins(:ecm_cms_navigation).where(:ecm_cms_navigations => { :locale => locale }), 
+                  :label_method => :key # .all.collect { |i| "#{'--' * i.depth} #{i.name}" }
+        end
+      end
     end
+
+#    I18n.available_locales.each do |locale|
+#      Ecm::Cms::Navigation.where(:locale => locale).all.each do |navigation|
+#        f.inputs :name => navigation do
+#          f.input :ecm_cms_navigation_items, 
+#                  :as => :check_boxes, 
+#                  :collection => nested_set_options(
+#                    navigation.ecm_cms_navigation_items.joins(:ecm_cms_navigation).where(:ecm_cms_navigations => { :locale => locale })
+#                  ) { |i| "#{'--' * i.level} #{i.name}" },
+#                  :selected => f.object.ecm_cms_navigation_items
+#        end
+#      end
+#    end
 
     f.actions
   end

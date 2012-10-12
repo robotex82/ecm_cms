@@ -14,6 +14,7 @@ class Ecm::Cms::Page < ActiveRecord::Base
   attr_accessible :basename,
                   :body,
                   :ecm_cms_folder_id,
+                  :ecm_cms_navigation_item_ids,
                   :format,
                   :handler,
                   :layout,
@@ -26,6 +27,7 @@ class Ecm::Cms::Page < ActiveRecord::Base
   after_initialize :set_defaults
   before_validation :assert_trailing_slash_on_pathname
   after_save :clear_resolver_cache
+  after_save :touch_navigation_items # , :if => Proc.new { |page| page.locale_changed? || page.pathname_changed? || page.basename_changed? }
 
   # validations
   validates :basename, :presence => true,
@@ -64,6 +66,10 @@ class Ecm::Cms::Page < ActiveRecord::Base
       self.locale  ||= I18n.default_locale.to_s
       self.handler ||= Ecm::Cms::Configuration.default_handlers[:page].to_s
     end
+  end
+
+  def touch_navigation_items
+    self.ecm_cms_navigation_items.map(&:update_url_form_page!)
   end
 end
 

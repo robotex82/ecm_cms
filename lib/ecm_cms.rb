@@ -1,3 +1,4 @@
+require 'active_admin-awesome_nested_set'
 require 'awesome_nested_set'
 require 'i18n_routing'
 require 'rails_tools/i18n_controller'

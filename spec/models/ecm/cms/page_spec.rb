@@ -17,9 +17,13 @@ module Ecm
           page.pathname.should eq('bar/')
         end
 
-        it "updates associated navigation items when the basename changes" # do
-#          page = FactoryGirl.build :ecm_cms_page, :pathname => 'bar'
-#        end
+        it "updates associated navigation items when the basename changes" do
+          navigation_item = FactoryGirl.create(:ecm_cms_navigation_item, :url => '/foo')
+          page = FactoryGirl.build :ecm_cms_page, :pathname => '/', :basename => 'bar', :locale => 'de'
+          page.ecm_cms_navigation_items << navigation_item
+          page.save!
+          navigation_item.url.should eq('/de/bar')
+        end
       end
 
       context 'sets default handler' do

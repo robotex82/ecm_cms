@@ -38,6 +38,15 @@ class Ecm::Cms::NavigationItem < ActiveRecord::Base
   validates :url, :presence => true
   validates :ecm_cms_navigation, :presence => true, :if => :root?
 
+  # @TODO: test
+  def to_label
+    if depth > 0
+    "#{'&nbsp;' * depth} &#9654; #{name}".html_safe
+    else
+      name
+    end
+  end
+
   def update_navigation_from_parent!
     self.update_navigation_from_parent
     self.save!
@@ -59,6 +68,11 @@ class Ecm::Cms::NavigationItem < ActiveRecord::Base
 
   def update_url_form_page
     self.url = build_url_from_page(ecm_cms_page.locale, ecm_cms_page.pathname, ecm_cms_page.basename)
+  end
+
+  def update_url_form_page!
+    self.url = build_url_from_page(ecm_cms_page.locale, ecm_cms_page.pathname, ecm_cms_page.basename)
+    self.save!
   end
 end
 
