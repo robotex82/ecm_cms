@@ -32,6 +32,7 @@ module Ecm
       end
 
       context 'sets default locale' do
+        before(:each) { I18n.locale = :de }
         subject { Ecm::Cms::Page.new }
         its(:locale) { should eq(I18n.locale.to_s) }
       end

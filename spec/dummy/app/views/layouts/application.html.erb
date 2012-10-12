@@ -47,7 +47,7 @@
           <a class="brand" href="#">Dummy</a>
           <div class="container nav-collapse">
             <div>
-            <%= cms_render_navigation 'main' %>
+            <%= cms_render_navigation 'main', :levels => 1..2 %>
             </div>
             <div class="pull-right">
               <%= cms_render_navigation 'legal' %>
@@ -71,7 +71,9 @@
                   <li><%= link_to "Link1", "/path1"  %></li>
                   <li><%= link_to "Link2", "/path2"  %></li>
                   <li><%= link_to "Link3", "/path3"  %></li>
+                  
                 </ul>
+                <%= cms_render_navigation 'main', :levels => 3, :expand_all => true %>
               </div><!--/.well -->
             </div><!--/span-->
         </div><!--/row-->

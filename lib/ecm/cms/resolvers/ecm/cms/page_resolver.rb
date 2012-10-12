@@ -6,16 +6,18 @@ module Ecm
 
       def find_templates(name, prefix, partial, details)
         return [] if partial
-
+#p name
+#p prefix
+#p partial
+#p details
         conditions = {
-#          :pathname    => normalize_path(name, prefix),
-          :pathname    => prefix + '/',
+          :pathname    => assert_slashs(prefix),
           :basename    => name,
           :locale      => normalize_array(details[:locale]).first,
           :format      => normalize_array(details[:formats]).first,
           :handler     => normalize_array(details[:handlers])
         }
-# p conditions.inspect
+#p conditions.inspect
         format = conditions.delete(:format)
         locale = conditions.delete(:locale)
         
@@ -61,11 +63,17 @@ module Ecm
         ::ActionView::Template.new(source, identifier, handler, details)
       end
 
-      # Normalize name and prefix, so the tuple ["index", "users"] becomes
-      # "users/index" and the tuple ["template", nil] becomes "template".
-      def normalize_path(name, prefix)
-        prefix.present? ? "#{prefix}/#{name}" : name
+      def assert_slashs(prefix)
+        prefix << '/' unless prefix.end_with?('/')
+        prefix = '/' << prefix unless prefix.start_with?('/')
+        return prefix
       end
+
+#      # Normalize name and prefix, so the tuple ["index", "users"] becomes
+#      # "users/index" and the tuple ["template", nil] becomes "template".
+#      def normalize_path(name, prefix)
+#        prefix.present? ? "#{prefix}/#{name}" : name
+#      end
 
       # Normalize arrays by converting all symbols to strings.
       def normalize_array(array)

@@ -52,6 +52,28 @@ module Ecm
             subject.find_templates(*@args).size.should eq(1)     
           end
         end
+
+        context "nested page lookup"do
+          before(:each) do
+            @page = Ecm::Cms::Page.create! do |page|
+              page.pathname = '/foo/bar/'
+              page.basename = 'baz'
+              page.format   = 'html'            
+              page.handler  = 'erb'
+              page.title    = 'Foo Page'
+            end          
+          end
+
+          it "should find templates" do
+            @args = [
+              "baz",
+              "foo/bar",
+              false,
+              { :handlers => [:builder, :erb], :locale => [:de], :formats => [:html] }
+            ]
+            subject.find_templates(*@args).size.should eq(1)     
+          end
+        end
       end
 
       describe "#initialize_template" do
@@ -69,13 +91,21 @@ module Ecm
         end
       end
 
-      describe "#normalize_path" do
-        it { subject.should respond_to :normalize_path }
+      describe "#assert_slashs" do
+        it { subject.should respond_to :assert_slashs }
 
-        it "should normalize the path" do
-          subject.normalize_path("index", "users").should eq("users/index")
+        it "should assert it has slashs on both ends" do
+          subject.assert_slashs("foo/bar").should eq("/foo/bar/")
         end
       end
+
+#      describe "#normalize_path" do
+#        it { subject.should respond_to :normalize_path }
+
+#        it "should normalize the path" do
+#          subject.normalize_path("index", "users").should eq("users/index")
+#        end
+#      end
 
       describe "#normalize_array" do
         before do
