@@ -12,7 +12,7 @@ module Ecm::CmsHelper
 
     return I18n.t('ecm.cms.navigation.messages.empty', :lang => I18n.locale.to_s, :name => name) if options[:items].empty?
     options[:items].first[:options] = {} if options[:items].first[:options].nil?
-    options[:items].first[:options].reverse_merge! :container_class => 'nav nav-pills'
+    options[:items].first[:options].reverse_merge! :container_class => 'nav'
     render_navigation(options)
   end
 

@@ -121,6 +121,22 @@ module Ecm
           end
         end
       end
+
+      describe "#build_source" do
+        before(:each) do
+          @body = 'foo'
+          @title = 'bar'
+          @meta_description = 'baz'
+        end
+
+        it "should add a content for block for the title" do
+          subject.build_source(@body, @title, @meta_description).should include("<% content_for :title do %>", "bar", "<% end %>")
+        end
+
+        it "should add a content for block for the meta description" do
+          subject.build_source(@body, @title, @meta_description).should include("<% content_for :meta_description do %>", "baz", "<% end %>")
+        end
+      end
     end
   end
 end

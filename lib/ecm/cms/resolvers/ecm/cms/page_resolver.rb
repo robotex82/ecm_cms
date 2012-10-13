@@ -43,8 +43,9 @@ module Ecm
 
       # Initialize an ActionView::Template object based on the record found.
       def initialize_template(record, details)
-        source     = record.body
-        identifier = "Page - #{record.id} - #{record.pathname.inspect}"
+        # source     = record.body
+        source     = build_source(record.body, record.title, record.meta_description)
+        identifier = "Page - #{record.id} - #{record.filename}"
         handler    = ::ActionView::Template.registered_template_handler(record.handler)
 
         # 5) Check for the record.format, if none is given, try the template
@@ -78,6 +79,13 @@ module Ecm
       # Normalize arrays by converting all symbols to strings.
       def normalize_array(array)
         array.map(&:to_s)
+      end
+
+      def build_source(body, title, meta_description)
+        body = '' if body.nil?
+        content_for_title = "<% content_for :title do %>#{Ecm::Cms::Configuration.site_title} - #{title}<% end %>"
+        content_for_meta_description = "<% content_for :meta_description do %>#{meta_description}<% end %>"
+        body << content_for_title << content_for_meta_description
       end
     end
   end

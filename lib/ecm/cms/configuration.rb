@@ -14,6 +14,9 @@ module Ecm
       def default_handlers=(default_handlers)
         @@default_handlers = HashWithIndifferentAccess.new(default_handlers)
       end
+
+      mattr_accessor :site_title
+      @@site_title = ''
     end
   end
 end

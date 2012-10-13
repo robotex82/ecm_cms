@@ -4,4 +4,6 @@ Ecm::Cms.configure do |config|
     :partial => :texterb,
     :template => :texterb
   }
+
+  config.site_title = Rails.application.class.parent_name
 end
