@@ -14,6 +14,10 @@ ActiveAdmin.register Ecm::Cms::Page do
       f.input :handler, :as => :select, :collection => ActionView::Template::Handlers.extensions.map(&:to_s)
     end
 
+    f.inputs do
+      f.input :layout
+    end
+
     I18n.available_locales.each do |locale|
       Ecm::Cms::Navigation.where(:locale => locale).all.each do |navigation|
         f.inputs do

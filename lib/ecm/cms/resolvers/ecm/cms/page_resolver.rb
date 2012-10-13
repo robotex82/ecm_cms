@@ -1,6 +1,6 @@
 module Ecm
   module Cms
-    class PageResolver < ActionView::Resolver
+    class PageResolver < ::ActionView::Resolver
       require 'singleton'
       include Singleton
 
@@ -14,7 +14,7 @@ module Ecm
           :format      => normalize_array(details[:formats]).first,
           :handler     => normalize_array(details[:handlers])
         }
-#p conditions.inspect
+
         format = conditions.delete(:format)
         locale = conditions.delete(:locale)
         
@@ -57,6 +57,8 @@ module Ecm
           #:virtual_path => virtual_path(record.pathname, record.partial)
           :virtual_path => record.pathname
         }
+
+        details[:layout] = record.layout if record.layout.present?
 
         ::ActionView::Template.new(source, identifier, handler, details)
       end
