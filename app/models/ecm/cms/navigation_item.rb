@@ -56,6 +56,11 @@ class Ecm::Cms::NavigationItem < ActiveRecord::Base
     self.descendants.map(&:"update_navigation_from_parent!")
   end
 
+  def update_url_form_page!
+    self.url = build_url_from_page(ecm_cms_page.locale, ecm_cms_page.pathname, ecm_cms_page.basename)
+    self.save!
+  end
+
   private
 
   def build_url_from_page(locale, pathname, basename)
@@ -68,11 +73,6 @@ class Ecm::Cms::NavigationItem < ActiveRecord::Base
 
   def update_url_form_page
     self.url = build_url_from_page(ecm_cms_page.locale, ecm_cms_page.pathname, ecm_cms_page.basename)
-  end
-
-  def update_url_form_page!
-    self.url = build_url_from_page(ecm_cms_page.locale, ecm_cms_page.pathname, ecm_cms_page.basename)
-    self.save!
   end
 end
 
