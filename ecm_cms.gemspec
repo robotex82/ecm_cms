@@ -20,6 +20,7 @@ Gem::Specification.new do |s|
   s.add_dependency "awesome_nested_set"
   s.add_dependency "draper"
   s.add_dependency "i18n_routing"
+  s.add_dependency "RedCloth"  
   s.add_dependency "simple-navigation"
   s.add_dependency "simple-navigation-bootstrap"
 

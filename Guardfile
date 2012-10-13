@@ -37,6 +37,6 @@ end
 
 guard 'bundler' do
   watch('Gemfile')
-  watch('(.*).gemspec')
+  watch(/(.*).gemspec/)
 end  
 

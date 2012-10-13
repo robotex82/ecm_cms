@@ -10,6 +10,7 @@ PATH
   remote: .
   specs:
     ecm_cms (0.0.1.pre)
+      RedCloth
       active_admin-awesome_nested_set
       awesome_nested_set
       draper
@@ -21,6 +22,7 @@ PATH
 GEM
   remote: http://rubygems.org/
   specs:
+    RedCloth (4.2.9)
     actionmailer (3.2.8)
       actionpack (= 3.2.8)
       mail (~> 2.4.4)

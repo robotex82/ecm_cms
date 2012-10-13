@@ -1,4 +1,5 @@
 require 'spec_helper'
+
 describe "requesting '/' redirects to the default locale" do
   it "redirects" do
     get "/"

@@ -6,10 +6,7 @@ module Ecm
 
       def find_templates(name, prefix, partial, details)
         return [] if partial
-#p name
-#p prefix
-#p partial
-#p details
+
         conditions = {
           :pathname    => assert_slashs(prefix),
           :basename    => name,
@@ -45,7 +42,7 @@ module Ecm
       def initialize_template(record, details)
         # source     = record.body
         source     = build_source(record.body, record.title, record.meta_description)
-        identifier = "Page - #{record.id} - #{record.filename}"
+        identifier = "Page - #{record.id} - #{record.pathname}#{record.filename}"
         handler    = ::ActionView::Template.registered_template_handler(record.handler)
 
         # 5) Check for the record.format, if none is given, try the template
@@ -65,9 +62,10 @@ module Ecm
       end
 
       def assert_slashs(prefix)
-        prefix << '/' unless prefix.end_with?('/')
-        prefix = '/' << prefix unless prefix.start_with?('/')
-        return prefix
+        output = prefix.dup
+        output << '/' unless output.end_with?('/')
+        output = '/' << output unless output.start_with?('/')
+        return output
       end
 
 #      # Normalize name and prefix, so the tuple ["index", "users"] becomes

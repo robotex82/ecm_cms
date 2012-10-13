@@ -21,7 +21,7 @@ module Ecm
             { :handlers => [:builder, :erb], :locale => [:de], :formats => [:html] }
           ]
         end
-        
+
         it { subject.should respond_to :find_templates }
         it "should return an Array" do
           subject.find_templates(*@valid_args).should be_a(Array)
@@ -36,10 +36,10 @@ module Ecm
             @page = Ecm::Cms::Page.create! do |page|
               page.pathname = '/'
               page.basename = 'foo'
-              page.format   = 'html'            
+              page.format   = 'html'
               page.handler  = 'erb'
               page.title    = 'Foo Page'
-            end          
+            end
           end
 
           it "should find templates" do
@@ -49,7 +49,7 @@ module Ecm
               false,
               { :handlers => [:builder, :erb], :locale => [:de], :formats => [:html] }
             ]
-            subject.find_templates(*@args).size.should eq(1)     
+            subject.find_templates(*@args).size.should eq(1)
           end
         end
 
@@ -58,10 +58,10 @@ module Ecm
             @page = Ecm::Cms::Page.create! do |page|
               page.pathname = '/foo/bar/'
               page.basename = 'baz'
-              page.format   = 'html'            
+              page.format   = 'html'
               page.handler  = 'erb'
               page.title    = 'Foo Page'
-            end          
+            end
           end
 
           it "should find templates" do
@@ -71,7 +71,30 @@ module Ecm
               false,
               { :handlers => [:builder, :erb], :locale => [:de], :formats => [:html] }
             ]
-            subject.find_templates(*@args).size.should eq(1)     
+            subject.find_templates(*@args).size.should eq(1)
+          end
+        end
+
+        context "page lookup without format"do
+          before(:each) do
+            @page = Ecm::Cms::Page.create! do |page|
+              page.pathname = '/'
+              page.basename = 'foo'
+              page.locale   = ''
+              page.format   = ''
+              page.handler  = 'textile'
+              page.title    = 'h1. A textilized page'
+            end
+          end
+
+          it "should find templates" do
+            @args = [
+              "foo",
+              "",
+              false,
+              { :formats => [ :html ], :locale => [ :en, :de ], :handlers => [ :textile, :erb, :arb, :builder ] }
+            ]
+            subject.find_templates(*@args).size.should eq(1)
           end
         end
       end
@@ -82,7 +105,7 @@ module Ecm
           record = Ecm::Cms::Page.create! do |page|
             page.pathname = '/'
             page.basename = 'foo'
-            page.format   = 'html'            
+            page.format   = 'html'
             page.handler  = 'erb'
             page.title    = 'Foo Page'
           end
@@ -140,3 +163,4 @@ module Ecm
     end
   end
 end
+
