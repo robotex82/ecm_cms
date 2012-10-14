@@ -1,3 +1,0 @@
-contact/_test.textile
-
-<%= raise 'hello' %>

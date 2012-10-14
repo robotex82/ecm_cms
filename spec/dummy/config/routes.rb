@@ -5,12 +5,11 @@ Dummy::Application.routes.draw do
 
   localized(I18n.available_locales) do
     scope "/:i18n_locale", :constraints => {:i18n_locale => /#{I18n.available_locales.join('|')}/} do 
+      # Contact route for view testing with controllers
+      resources :contact, :only => [ :index ]
 
-    # Contact route for view testing with controllers
-    resources :contact, :only => [ :index ]
-
-    # ECM CMS
-    Ecm::Cms::Routing.routes(self)
+      # ECM CMS
+      Ecm::Cms::Routing.routes(self)
     end  
   end  
   match "/", :to => redirect("/#{I18n.locale}")

@@ -17,6 +17,10 @@ module Ecm
         record.body
       end
 
+      def normalize_basename(basename)
+        '_' << basename
+      end
+
       def resolve(partial_flag)
         partial_flag
       end

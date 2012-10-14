@@ -15,8 +15,8 @@ module Ecm
         return [] unless resolve(partial)
 
         conditions = {
-          :pathname    => assert_slashs(prefix),
-          :basename    => name,
+          :pathname    => assert_slashs(prefix.to_s),
+          :basename    => normalize_basename(name),
           :locale      => normalize_array(details[:locale]).first,
           :format      => normalize_array(details[:formats]).first,
           :handler     => normalize_array(details[:handlers])
@@ -47,10 +47,8 @@ module Ecm
 
       # Initialize an ActionView::Template object based on the record found.
       def initialize_template(record, details)
-        # source     = record.body
-        # source     = build_source(record.body, record.title, record.meta_description)
         source     = build_source(record)
-        identifier = "#{record.class} - #{record.id} - #{record.pathname}#{record.filename}"
+        identifier = "#{record.class} - #{record.id} - #{record.pathname}#{record.basename}"
         handler    = ::ActionView::Template.registered_template_handler(record.handler)
 
         # 5) Check for the record.format, if none is given, try the template
@@ -62,8 +60,7 @@ module Ecm
         details = {
           :format => format,
           :updated_at => record.updated_at,
-          #:virtual_path => virtual_path(record.pathname, record.partial)
-          :virtual_path => record.pathname
+          :virtual_path => "#{record.pathname}#{record.basename}"
         }
 
         details[:layout] = record.layout if record.layout.present?
@@ -78,12 +75,6 @@ module Ecm
         return output
       end
 
-#      # Normalize name and prefix, so the tuple ["index", "users"] becomes
-#      # "users/index" and the tuple ["template", nil] becomes "template".
-#      def normalize_path(name, prefix)
-#        prefix.present? ? "#{prefix}/#{name}" : name
-#      end
-
       # Normalize arrays by converting all symbols to strings.
       def normalize_array(array)
         array.map(&:to_s)
@@ -91,6 +82,10 @@ module Ecm
 
       def build_source
         raise "call to abstract method #build_source"
+      end
+
+      def normalize_basename(basename)
+        raise "call to abstract method #normalize_basename"
       end
 
       def resolve(partial_flag)

@@ -8,7 +8,7 @@ module Ecm
       describe "#find_templates" do
         before do
           @valid_args = [
-            "_foo",
+            "foo",
             "",
             true,
             { :handlers => [:builder, :erb], :locale => [:de], :formats => [:html] }
@@ -43,7 +43,7 @@ module Ecm
 
           it "should find partials" do
             @args = [
-              "_foo",
+              "foo",
               "",
               true,
               { :handlers => [:builder, :erb], :locale => [:de], :formats => [:html] }
@@ -64,7 +64,7 @@ module Ecm
 
           it "should find partials" do
             @args = [
-              "_baz",
+              "baz",
               "foo/bar",
               true,
               { :handlers => [:builder, :erb], :locale => [:de], :formats => [:html] }
@@ -86,7 +86,7 @@ module Ecm
 
           it "should find partials" do
             @args = [
-              "_foo",
+              "foo",
               "",
               true,
               { :formats => [ :html ], :locale => [ :en, :de ], :handlers => [ :textile, :erb, :arb, :builder ] }

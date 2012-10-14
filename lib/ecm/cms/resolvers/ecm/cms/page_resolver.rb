@@ -20,6 +20,10 @@ module Ecm
         source << content_for_title << content_for_meta_description
       end
 
+      def normalize_basename(basename)
+        basename
+      end
+
       def resolve(partial_flag)
         !partial_flag
       end
