@@ -60,7 +60,7 @@ namespace :ecm do
 
       desc "Creates example navigations"
       task :populate_navigations, [] => [:environment] do |t, args|
-        %w(main legal).each do |name|
+        %w(i18n legal main).each do |name|
           I18n.available_locales.each do |locale|
             Ecm::Cms::Navigation.create! do |n|
               n.locale = locale.to_s
@@ -74,6 +74,10 @@ namespace :ecm do
       task :populate_navigation_items, [] => [:environment] do |t, args|
         items = {
           :de => {
+            :i18n => [
+              { :name => 'Deutsch', :key => 'i18n_de', :url => '/de', :options => nil},
+              { :name => 'English', :key => 'i18n_de', :url => '/en', :options => nil}
+            ],
             :legal => [
               { :name => 'Impressum', :ecm_cms_page => Ecm::Cms::Page.where(:basename => 'impressum', :locale => 'de').first, :key => 'imprint', :url => nil, :options => nil},
               { :name => 'AGB', :ecm_cms_page => Ecm::Cms::Page.where(:basename => 'agb', :locale => 'de').first, :key => 'terms_of_service', :url => nil, :options => nil}
@@ -86,6 +90,10 @@ namespace :ecm do
             ]
           },
           :en => {
+            :i18n => [
+              { :name => 'Deutsch', :key => 'i18n_de', :url => '/de', :options => nil},
+              { :name => 'English', :key => 'i18n_en', :url => '/en', :options => nil}
+            ],
             :legal => [
               { :name => 'Imprint', :ecm_cms_page => Ecm::Cms::Page.where(:basename => 'imprint', :locale => 'en').first, :key => 'imprint', :url => nil, :options => nil},
               { :name => 'Terms of Service', :ecm_cms_page => Ecm::Cms::Page.where(:basename => 'terms-of-service', :locale => 'en').first, :key => 'terms_of_service', :url => nil, :options => nil}

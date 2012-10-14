@@ -41,15 +41,13 @@
     <div class="navbar navbar-fixed-top">
       <div class="navbar-inner">
         <div class="container">
-          <a class="btn btn-navbar" data-target=".nav-collapse" data-toggle="collapse">
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </a>
-          <a class="brand" href="#">Dummy</a>
+          <%= link_to 'Dummy', root_path, :class => 'brand' %>
           <div class="container nav-collapse">
             <div>
             <%= cms_render_navigation 'main', :levels => 1..2 %>
+            </div>
+            <div class="pull-right">
+              <%= cms_render_navigation 'i18n' %>
             </div>
             <div class="pull-right">
               <%= cms_render_navigation 'legal' %>
