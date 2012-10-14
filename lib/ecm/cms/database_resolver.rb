@@ -12,7 +12,7 @@ module Ecm
 
       # instance methods go here
       def find_templates(name, prefix, partial, details)
-        return [] if partial
+        return [] unless resolve(partial)
 
         conditions = {
           :pathname    => assert_slashs(prefix),
@@ -87,6 +87,14 @@ module Ecm
       # Normalize arrays by converting all symbols to strings.
       def normalize_array(array)
         array.map(&:to_s)
+      end
+
+      def build_source
+        raise "call to abstract method #build_source"
+      end
+
+      def resolve(partial_flag)
+        raise "call to abstract method #resolve"
       end
 
       def template_class

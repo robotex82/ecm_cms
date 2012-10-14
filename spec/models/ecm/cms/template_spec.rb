@@ -28,6 +28,17 @@ module Ecm
         end
       end
 
+      context 'template callbacks' do
+        subject { Ecm::Cms::Template.new }
+
+        it "removes a '_' from the basename before validation" do
+          subject.basename = '_foo'
+          subject.valid?
+
+          subject.basename.should eq('foo')
+        end
+      end
+
       context 'validations' do
         it { should validate_presence_of :basename }
         # Removed test to respect adding a trailing slash to pathname before validation

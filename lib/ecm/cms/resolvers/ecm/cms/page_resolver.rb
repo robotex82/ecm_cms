@@ -9,10 +9,6 @@ module Ecm
       # add shared behaviour for database backed templates
       include Ecm::Cms::DatabaseResolver
 
-      def template_class
-        'Ecm::Cms::Page'
-      end
-
       def build_source(record)
         if record.body.nil?
           source = '' 
@@ -22,6 +18,14 @@ module Ecm
         content_for_title = "<% content_for :title do %>#{Ecm::Cms::Configuration.site_title} - #{record.title}<% end %>"
         content_for_meta_description = "<% content_for :meta_description do %>#{record.meta_description}<% end %>"
         source << content_for_title << content_for_meta_description
+      end
+
+      def resolve(partial_flag)
+        !partial_flag
+      end
+
+      def template_class
+        'Ecm::Cms::Page'
       end
     end
   end

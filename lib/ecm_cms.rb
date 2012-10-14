@@ -18,6 +18,7 @@ require 'ecm/cms/database_template'
 
 require 'ecm/cms/resolvers/ecm/cms/page_resolver'
 require 'ecm/cms/resolvers/ecm/cms/template_resolver'
+require 'ecm/cms/resolvers/ecm/cms/partial_resolver'
 
 ::ActionView::Template.register_template_handler :textile, ::ActionView::Template::Handlers::Textile.new
 
@@ -26,3 +27,4 @@ module Ecm
     extend Configuration
   end
 end
+

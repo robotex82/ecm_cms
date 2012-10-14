@@ -1,4 +1,4 @@
-ActiveAdmin.register Ecm::Cms::Template do
+ActiveAdmin.register Ecm::Cms::Partial do
   form do |f|
     f.inputs do
       f.input :body
@@ -25,13 +25,13 @@ ActiveAdmin.register Ecm::Cms::Template do
   end
 
   show do
-    panel Ecm::Cms::Template.human_attribute_name(:body) do
-      ecm_cms_template.body
+    panel Ecm::Cms::Partial.human_attribute_name(:body) do
+      ecm_cms_partial.body
     end
   end
 
-  sidebar Ecm::Cms::Template.human_attribute_name(:details), :only => :show do
-    attributes_table_for ecm_cms_template do
+  sidebar Ecm::Cms::Partial.human_attribute_name(:details), :only => :show do
+    attributes_table_for ecm_cms_partial do
       # row :folder
       row :pathname
       row :filename

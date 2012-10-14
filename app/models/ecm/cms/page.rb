@@ -1,5 +1,3 @@
-# require 'ecm/cms/database_template'
-
 class Ecm::Cms::Page < ActiveRecord::Base
   self.table_name = 'ecm_cms_pages'
 
