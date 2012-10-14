@@ -26,7 +26,7 @@ ActiveAdmin.register Ecm::Cms::Template do
 
   show do
     panel Ecm::Cms::Template.human_attribute_name(:body) do
-      ecm_cms_template.body
+      pre { ecm_cms_template.body }
     end
   end
 

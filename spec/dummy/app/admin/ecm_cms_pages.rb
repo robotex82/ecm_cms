@@ -59,7 +59,7 @@ ActiveAdmin.register Ecm::Cms::Page do
 
   show do
     panel Ecm::Cms::Page.human_attribute_name(:body) do
-      ecm_cms_page.body
+      pre { ecm_cms_page.body }
     end
   end
 

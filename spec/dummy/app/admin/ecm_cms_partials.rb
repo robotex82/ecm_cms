@@ -26,7 +26,7 @@ ActiveAdmin.register Ecm::Cms::Partial do
 
   show do
     panel Ecm::Cms::Partial.human_attribute_name(:body) do
-      ecm_cms_partial.body
+      pre { ecm_cms_partial.body }
     end
   end
 
