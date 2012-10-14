@@ -28,7 +28,13 @@ ActiveAdmin.register Ecm::Cms::NavigationItem do
     column :ecm_cms_navigation
     column :name
     column :url
-    column :ecm_cms_page
+    column :ecm_cms_page do |ni|
+      if ni.ecm_cms_page.blank?
+        link_to(I18n.t('active_admin.new'), new_admin_ecm_cms_page_path({:ecm_cms_page => ni.params_for_new_page}))
+      else
+        link_to(ni.ecm_cms_page.title, [:admin, ni.ecm_cms_page])
+      end
+    end
     column :created_at
     column :updated_at
     default_actions

@@ -37,7 +37,7 @@ module Ecm
 
       # instance methods go here
       def filename
-        filename = basename
+        filename = basename.dup
         filename << ".#{locale}" if locale.present?
         filename << ".#{format}" if format.present?
         filename << ".#{handler}" if handler.present?

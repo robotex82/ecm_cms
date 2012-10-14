@@ -50,6 +50,7 @@ ActiveAdmin.register Ecm::Cms::Page do
     column :pathname
     column :filename
     column :title
+    column :home_page?
     column :layout
     column :ecm_cms_navigation_items
     column :created_at
@@ -69,6 +70,7 @@ ActiveAdmin.register Ecm::Cms::Page do
       # row :folder
       row :pathname
       row :filename
+      row :home_page?
       row :layout
       row :created_at
       row :updated_at

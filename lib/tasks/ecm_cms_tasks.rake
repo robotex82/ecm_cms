@@ -60,13 +60,23 @@ namespace :ecm do
 
       desc "Creates example navigations"
       task :populate_navigations, [] => [:environment] do |t, args|
-        %w(i18n legal main).each do |name|
-          I18n.available_locales.each do |locale|
-            Ecm::Cms::Navigation.create! do |n|
-              n.locale = locale.to_s
-              n.name = name
-            end
-          end
+        navigations = {
+          :de => [
+            { :name => 'i18n' },
+            { :name => 'legal' },
+            { :name => 'main' }            
+          ],
+          :en => [
+            { :name => 'i18n' },
+            { :name => 'legal' },
+            { :name => 'main' }   
+          ]
+        }.with_indifferent_access
+
+        I18n.available_locales.each do |locale|
+          navigations[locale].each do |navigation|
+            Ecm::Cms::Navigation.create!(navigation.reverse_merge!({ :locale => locale.to_s }))
+          end if navigations.has_key?(locale)
         end
       end
 

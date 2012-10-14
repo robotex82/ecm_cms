@@ -76,6 +76,31 @@ module Ecm
           subject.filename.should eq('foo.en.html')
         end
       end
+
+      context "#home_page?" do
+        subject { Ecm::Cms::Page.new() }
+
+        it "should return true if the pathname is '/' and the basename is 'home'" do
+          subject.pathname = '/'
+          subject.basename = 'home'
+
+          subject.home_page?.should be(true)
+        end
+
+        it "should return false if the pathname is '/foo' and the basename is 'home'" do
+          subject.pathname = '/foo'
+          subject.basename = 'home'
+
+          subject.home_page?.should be(false)
+        end
+
+        it "should return false if the pathname is '/' and the basename is 'foo'" do
+          subject.pathname = '/'
+          subject.basename = 'foo'
+
+          subject.home_page?.should be(false)
+        end
+      end
     end
   end
 end

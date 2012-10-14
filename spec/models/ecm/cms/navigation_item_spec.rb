@@ -46,6 +46,14 @@ module Ecm
             ni.valid?
             ni.url.should eq('/en/about-us')
           end
+
+          it "should set the correct url for home pages" do
+            page = FactoryGirl.build :ecm_cms_page, :pathname => '/', :basename => 'home', :locale => 'en'
+            ni = FactoryGirl.build :ecm_cms_navigation_item, :url => nil, :ecm_cms_page => page
+            
+            ni.valid?
+            ni.url.should eq('/en')
+          end
         end
       end
 
@@ -63,6 +71,36 @@ module Ecm
         it "should not validate presence of :ecm_cms_navigation if it is a child item" do
           navigation_item = FactoryGirl.build :ecm_cms_navigation_item_child, :ecm_cms_navigation => nil
           navigation_item.should be_valid
+        end
+      end
+
+      context "#params_for_new_page" do
+        context "for a new record" do
+          subject { Ecm::Cms::NavigationItem.new }
+
+          it "should return an empty hash if the record is not persisted" do
+            subject.params_for_new_page.should eq({})
+          end
+        end
+
+        context "for a persisted object" do
+          subject { FactoryGirl.create(:ecm_cms_navigation_item) }
+
+          it "should return the correct params when having the url '/en/contact'" do
+            subject.url = '/en/contact'
+            subject.name = "Contact"
+
+            expected_params = { :locale => 'en', :pathname => '/', :basename => 'contact', :title => subject.name, :ecm_cms_navigation_item_ids => [ subject.to_param ] }
+            subject.params_for_new_page.should eq(expected_params)
+          end
+
+          it "should return the correct params when having the url '/en'" do
+            subject.url = '/en'
+            subject.name = "Home"
+
+            expected_params = { :locale => 'en', :pathname => '/', :basename => 'home', :title => subject.name, :ecm_cms_navigation_item_ids => [ subject.to_param ] }
+            subject.params_for_new_page.should eq(expected_params)
+          end
         end
       end
     end
