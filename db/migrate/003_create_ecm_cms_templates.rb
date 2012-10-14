@@ -4,7 +4,6 @@ class CreateEcmCmsTemplates < ActiveRecord::Migration
       t.string :basename
       t.string :pathname
       t.text :body
-      t.string :layout
       t.string :locale
       t.string :format
       t.string :handler

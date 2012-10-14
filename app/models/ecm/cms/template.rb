@@ -1,4 +1,11 @@
+# require 'ecm/cms/database_template'
+
 class Ecm::Cms::Template < ActiveRecord::Base
+  self.table_name = 'ecm_cms_templates'
+
+  # add shared behaviour for database backed templates
+  include Ecm::Cms::DatabaseTemplate
+  
   # associations
   belongs_to :ecm_cms_folder,
              :class_name => 'Ecm::Cms::Folder',
@@ -7,34 +14,35 @@ class Ecm::Cms::Template < ActiveRecord::Base
   # attributes
   attr_accessible :basename,
                   :body,
+                  :ecm_cms_folder_id,
                   :format,
                   :handler,
                   :layout,
                   :locale,
                   :pathname
 
-  # callbacks
-  after_initialize :set_defaults
+#  # callbacks
+#  after_initialize :set_defaults
 
-  # validations
-  validates :basename, :presence => true,
-                       :uniqueness => { :scope => :ecm_cms_folder_id }
-  validates :handler, :inclusion => ActionView::Template::Handlers.extensions.map(&:to_s)
-  validates :locale, :inclusion => I18n.available_locales.map(&:to_s),
-                     :allow_nil => true,
-                     :allow_blank => true
-  validates :format, :inclusion => Mime::SET.symbols.map(&:to_s),
-                     :allow_nil => true,
-                     :allow_blank => true
-  validates :pathname, :presence => true
+#  # validations
+#  validates :basename, :presence => true,
+#                       :uniqueness => { :scope => :ecm_cms_folder_id }
+#  validates :handler, :inclusion => ActionView::Template::Handlers.extensions.map(&:to_s)
+#  validates :locale, :inclusion => I18n.available_locales.map(&:to_s),
+#                     :allow_nil => true,
+#                     :allow_blank => true
+#  validates :format, :inclusion => Mime::SET.symbols.map(&:to_s),
+#                     :allow_nil => true,
+#                     :allow_blank => true
+#  validates :pathname, :presence => true
 
-  private
+#  private
 
-  def set_defaults
-    if self.new_record?
-      self.locale  ||= I18n.default_locale.to_s
-      self.handler ||= Ecm::Cms::Configuration.default_handlers[:template].to_s
-    end
-  end
+#  def set_defaults
+#    if self.new_record?
+#      self.locale  ||= I18n.default_locale.to_s
+#      self.handler ||= Ecm::Cms::Configuration.default_handlers[:template].to_s
+#    end
+#  end
 end
 

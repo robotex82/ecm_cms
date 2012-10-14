@@ -11,12 +11,25 @@ module Ecm
       end
 
       context 'callbacks' do
+        subject { Ecm::Cms::Template.new }
+
         it "adds a '/' to the pathname before validation" do
-          page = FactoryGirl.build :ecm_cms_page, :pathname => 'bar'
-          page.save
-          page.pathname.should eq('bar/')
+          subject.pathname = 'bar'
+          subject.save
+          subject.pathname.should eq('bar/')
         end
 
+        context 'sets default handler on initialization' do
+          its(:handler) { should eq(Ecm::Cms::Configuration.default_handlers[:page].to_s) }
+        end
+
+        context 'sets default locale on initialization' do
+          before(:each) { I18n.locale = :de }
+          its(:locale) { should eq(I18n.locale.to_s) }
+        end
+      end
+
+      context 'page callbacks' do
         it "updates associated navigation items when the basename changes" do
           navigation_item = FactoryGirl.create(:ecm_cms_navigation_item, :url => '/foo')
           page = FactoryGirl.build :ecm_cms_page, :pathname => '/', :basename => 'bar', :locale => 'de'
@@ -24,17 +37,6 @@ module Ecm
           page.save!
           navigation_item.url.should eq('/de/bar')
         end
-      end
-
-      context 'sets default handler' do
-        subject { Ecm::Cms::Page.new }
-        its(:handler) { should eq(Ecm::Cms::Configuration.default_handlers[:page].to_s) }
-      end
-
-      context 'sets default locale' do
-        before(:each) { I18n.locale = :de }
-        subject { Ecm::Cms::Page.new }
-        its(:locale) { should eq(I18n.locale.to_s) }
       end
 
       context 'validations' do
@@ -56,21 +58,22 @@ module Ecm
       end
 
       context '#filename' do
+        subject { Ecm::Cms::Page.new }
+        
         it "builds foo.html from basename => foo, handler => html" do
-          page = Ecm::Cms::Page.new
-          page.basename = 'foo'
-          page.locale   = nil
-          page.handler  = 'html'
-          
-          page.filename.should eq('foo.html')
+          subject.basename = 'foo'
+          subject.locale   = nil
+          subject.handler  = 'html'       
+
+          subject.filename.should eq('foo.html')
         end
 
         it "builds foo.en.html from basename => foo, locale => en, handler => html" do
-          page = Ecm::Cms::Page.new
-          page.basename = 'foo'
-          page.locale   = 'en'
-          page.handler  = 'html'
-          page.filename.should eq('foo.en.html')
+          subject.basename = 'foo'
+          subject.locale   = 'en'
+          subject.handler  = 'html'
+
+          subject.filename.should eq('foo.en.html')
         end
       end
     end

@@ -2,8 +2,8 @@ require 'spec_helper'
 
 module Ecm
   module Cms
-    describe PageResolver do
-      subject { Ecm::Cms::PageResolver.instance }
+    describe TemplateResolver do
+      subject { Ecm::Cms::TemplateResolver.instance }
 
       describe "#find_templates" do
         before do
@@ -33,12 +33,11 @@ module Ecm
 
         context "page lookup"do
           before(:each) do
-            @page = Ecm::Cms::Page.create! do |page|
-              page.pathname = '/'
-              page.basename = 'foo'
-              page.format   = 'html'
-              page.handler  = 'erb'
-              page.title    = 'Foo Page'
+            @template = Ecm::Cms::Template.create! do |template|
+              template.pathname = '/'
+              template.basename = 'foo'
+              template.format   = 'html'
+              template.handler  = 'erb'
             end
           end
 
@@ -53,14 +52,13 @@ module Ecm
           end
         end
 
-        context "nested page lookup"do
+        context "template in subfolder lookup"do
           before(:each) do
-            @page = Ecm::Cms::Page.create! do |page|
-              page.pathname = '/foo/bar/'
-              page.basename = 'baz'
-              page.format   = 'html'
-              page.handler  = 'erb'
-              page.title    = 'Foo Page'
+            @template = Ecm::Cms::Template.create! do |template|
+              template.pathname = '/foo/bar/'
+              template.basename = 'baz'
+              template.format   = 'html'
+              template.handler  = 'erb'
             end
           end
 
@@ -75,15 +73,14 @@ module Ecm
           end
         end
 
-        context "page lookup without format"do
+        context "template lookup without format"do
           before(:each) do
-            @page = Ecm::Cms::Page.create! do |page|
-              page.pathname = '/'
-              page.basename = 'foo'
-              page.locale   = ''
-              page.format   = ''
-              page.handler  = 'textile'
-              page.title    = 'h1. A textilized page'
+            @page = Ecm::Cms::Template.create! do |template|
+              template.pathname = '/'
+              template.basename = 'foo'
+              template.locale   = ''
+              template.format   = ''
+              template.handler  = 'textile'
             end
           end
 
@@ -102,12 +99,11 @@ module Ecm
       describe "#initialize_template" do
         it { subject.should respond_to :initialize_template }
         it "returns an ActionView Template" do
-          record = Ecm::Cms::Page.create! do |page|
-            page.pathname = '/'
-            page.basename = 'foo'
-            page.format   = 'html'
-            page.handler  = 'erb'
-            page.title    = 'Foo Page'
+          record = Ecm::Cms::Template.create! do |template|
+            template.pathname = '/'
+            template.basename = 'foo'
+            template.format   = 'html'
+            template.handler  = 'erb'
           end
           details =  { :handlers => [:builder, :erb], :locale => [:de], :formats => [:html] }
           subject.initialize_template(record, details).should be_a(::ActionView::Template)
@@ -121,14 +117,6 @@ module Ecm
           subject.assert_slashs("foo/bar").should eq("/foo/bar/")
         end
       end
-
-#      describe "#normalize_path" do
-#        it { subject.should respond_to :normalize_path }
-
-#        it "should normalize the path" do
-#          subject.normalize_path("index", "users").should eq("users/index")
-#        end
-#      end
 
       describe "#normalize_array" do
         before do
@@ -148,20 +136,14 @@ module Ecm
       describe "#build_source" do
         before(:each) do
           RecordMock = Class.new do
-            attr_accessor :body, :title, :meta_description 
+            attr_accessor :body
           end
           @record = RecordMock.new
           @record.body = 'foo'
-          @record.title = 'bar'
-          @record.meta_description = 'baz'
         end
 
-        it "should add a content for block for the title" do
-          subject.build_source(@record).should include("<% content_for :title do %>", "bar", "<% end %>")
-        end
-
-        it "should add a content for block for the meta description" do
-          subject.build_source(@record).should include("<% content_for :meta_description do %>", "baz", "<% end %>")
+        it "should use the body as source" do
+          subject.build_source(@record).should eq(@record.body)
         end
       end
     end

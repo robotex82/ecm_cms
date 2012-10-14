@@ -12,7 +12,12 @@ require 'simple-navigation-bootstrap'
 require 'ecm/cms/engine'
 require 'ecm/cms/configuration'
 require 'ecm/cms/routing'
+
+# require 'ecm/cms/database_resolver'
+require 'ecm/cms/database_template'
+
 require 'ecm/cms/resolvers/ecm/cms/page_resolver'
+require 'ecm/cms/resolvers/ecm/cms/template_resolver'
 
 ::ActionView::Template.register_template_handler :textile, ::ActionView::Template::Handlers::Textile.new
 
