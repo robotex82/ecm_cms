@@ -1,3 +1,5 @@
+include ActiveAdmin::AwesomeNestedSet::Helper
+
 ActiveAdmin.register Ecm::Cms::Navigation do
   filter :locale, :as => :select, :collection => I18n.available_locales.map(&:to_s)
   filter :name
@@ -21,6 +23,7 @@ ActiveAdmin.register Ecm::Cms::Navigation do
   show do
     panel Ecm::Cms::Navigation.human_attribute_name(:ecm_cms_navigation_items) do
       table_for ecm_cms_navigation.ecm_cms_navigation_items do
+        sortable_tree_columns
         column :name
         column :url
         column :ecm_cms_page
