@@ -1,8 +1,12 @@
 include ActiveAdmin::AwesomeNestedSet::Helper
 
 ActiveAdmin.register Ecm::Cms::Navigation do
+  # Filters
   filter :locale, :as => :select, :collection => I18n.available_locales.map(&:to_s)
   filter :name
+
+  # Menu
+  menu :parent => Proc.new { I18n.t('ecm.cms.active_admin.menu') }.call  
 
   form do |f|
     f.inputs do
@@ -22,7 +26,7 @@ ActiveAdmin.register Ecm::Cms::Navigation do
 
   show do
     panel Ecm::Cms::Navigation.human_attribute_name(:ecm_cms_navigation_items) do
-      table_for ecm_cms_navigation.ecm_cms_navigation_items do
+      table_for ecm_cms_navigation.ecm_cms_navigation_items, :i18n => Ecm::Cms::NavigationItem do
         sortable_tree_columns
         column :name
         column :url

@@ -5,12 +5,28 @@ module Ecm
         desc "Copies the locale files to your application"
 
         source_root File.expand_path('../../../../../../config/locales', __FILE__)
-        
+
         def generate_locales
           copy_file "ecm.cms.en.yml", "config/locales/ecm.cms.en.yml"
           copy_file "ecm.cms.de.yml", "config/locales/ecm.cms.de.yml"
-        end   
+
+          copy_file "ecm.cms.navigation.en.yml", "config/locales/ecm.cms.navigation.en.yml"
+          copy_file "ecm.cms.navigation.de.yml", "config/locales/ecm.cms.navigation.de.yml"
+
+          copy_file "ecm.cms.navigation_item.en.yml", "config/locales/ecm.cms.navigation_item.en.yml"
+          copy_file "ecm.cms.navigation_item.de.yml", "config/locales/ecm.cms.navigation_item.de.yml"
+
+          copy_file "ecm.cms.page.en.yml", "config/locales/ecm.cms.page.en.yml"
+          copy_file "ecm.cms.page.de.yml", "config/locales/ecm.cms.page.de.yml"
+
+          copy_file "ecm.cms.partial.en.yml", "config/locales/ecm.cms.partial.en.yml"
+          copy_file "ecm.cms.partial.de.yml", "config/locales/ecm.cms.partial.de.yml"
+
+          copy_file "ecm.cms.template.en.yml", "config/locales/ecm.cms.template.en.yml"
+          copy_file "ecm.cms.template.de.yml", "config/locales/ecm.cms.template.de.yml"
+        end
       end
     end
   end
-end        
+end
+

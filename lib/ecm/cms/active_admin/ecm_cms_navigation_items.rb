@@ -2,6 +2,9 @@ ActiveAdmin.register Ecm::Cms::NavigationItem do
   # Add member actions for positioning.
   sortable_tree_member_actions
 
+  # Menu
+  menu :parent => Proc.new { I18n.t('ecm.cms.active_admin.menu') }.call
+
   form do |f|
     f.inputs do
       f.input :ecm_cms_navigation

@@ -1,0 +1,16 @@
+---
+de:
+  activerecord:
+    models:
+      ecm/cms/navigation:
+        one: Navigation
+        other: Navigationen
+    attributes:
+      ecm/cms/navigation:
+        created_at: Erstellt am
+        ecm_cms_navigation_items: Navigationseinträge
+        locale: Sprache
+        name: Name
+        slug: Freundliche ID
+        updated_at: Aktualisiert am
+

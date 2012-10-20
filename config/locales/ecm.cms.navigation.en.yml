@@ -1,0 +1,16 @@
+---
+en:
+  activerecord:
+    models:
+      ecm/cms/navigation:
+        one: navigation
+        other: navigations
+    attributes:
+      ecm/cms/navigation:
+        created_at: created at
+        ecm_cms_navigation_items: navigation items
+        locale: language
+        name: name
+        slug: friendly id
+        updated_at: updated at
+

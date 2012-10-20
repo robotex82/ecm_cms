@@ -12,10 +12,8 @@ class Ecm::Cms::NavigationItem < ActiveRecord::Base
   # attributes
   attr_accessible :depth,
                   :key,
-#                  :lft,
                   :name,
                   :options,
-#                  :rgt,
                   :string,
                   :url
   attr_protected :lgt,

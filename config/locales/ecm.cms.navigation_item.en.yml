@@ -1,0 +1,23 @@
+---
+en:
+  activerecord:
+    models:
+      ecm/cms/navigation_item:
+        one: navigation item
+        other: navigation items
+    attributes:
+      ecm/cms/navigation_item:
+        created_at: created at
+        depth: tree depth
+        ecm_cms_navigation: navigation
+        ecm_cms_page: page
+        key: key
+        lft: left
+        name: name
+        options: options
+        parent: parent
+        rgt: right
+        slug: friendly id
+        updated_at: updated at
+        url: target url
+

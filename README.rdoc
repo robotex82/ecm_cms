@@ -1,3 +1,55 @@
 = ECM Module Template
 
+= Prerequisites
+
+  * rails ~> 3.2.8
+  * active admin ~> 0.5.0
+
+= Installation
+
+Add it to your bundle:
+
+  # Gemfile:
+  gem 'ecm_cms'
+
+Install your bundle:
+
+  > bundle install
+
+Install the intializer:
+
+  > rails g ecm:cms:install
+
+Install the locales
+
+  > rails g ecm:cms:locales
+
+Generate migrations and migrate:
+
+  > rake ecm_cms_engine:install:migrations
+  > rake db:migrate
+
+= Configuring localized routing
+
+Add the routes to your routing file:
+
+  # config/routes.rb:
+  localized(I18n.available_locales) do
+    scope "/:i18n_locale", :constraints => {:i18n_locale => /#{I18n.available_locales.join('|')}/} do 
+      # ECM CMS
+      Ecm::Cms::Routing.routes(self)
+    end  
+  end  
+  match "/", :to => redirect("/#{I18n.locale}")
+
+= Optional: Generating example/default data
+
+There is a task to prepopulate your database tables with example data.
+
+Warning: *RUNNING THIS WILL DELETE ALL OF YOUR CMS DATA AND REPLACE IT WITH EXAMPLE DATA!*
+
+  > rake ecm:cms:db:populate!
+
+= License
+
 This project rocks and uses MIT-LICENSE.

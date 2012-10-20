@@ -1,4 +1,7 @@
-ActiveAdmin.register Ecm::Cms::Partial do
+ActiveAdmin.register Ecm::Cms::Template do
+  # Menu
+  menu :parent => Proc.new { I18n.t('ecm.cms.active_admin.menu') }.call
+
   form do |f|
     f.inputs do
       f.input :body
@@ -25,14 +28,13 @@ ActiveAdmin.register Ecm::Cms::Partial do
   end
 
   show do
-    panel Ecm::Cms::Partial.human_attribute_name(:body) do
-      pre { ecm_cms_partial.body }
+    panel Ecm::Cms::Template.human_attribute_name(:body) do
+      pre { ecm_cms_template.body }
     end
   end
 
-  sidebar Ecm::Cms::Partial.human_attribute_name(:details), :only => :show do
-    attributes_table_for ecm_cms_partial do
-p ecm_cms_partial.inspect
+  sidebar Ecm::Cms::Template.human_attribute_name(:details), :only => :show do
+    attributes_table_for ecm_cms_template do
       # row :folder
       row :pathname
       row :filename
@@ -41,3 +43,4 @@ p ecm_cms_partial.inspect
     end
   end # sidebar
 end
+
