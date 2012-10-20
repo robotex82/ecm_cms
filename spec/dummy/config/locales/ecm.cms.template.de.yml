@@ -12,6 +12,7 @@ de:
         created_at: Erstellt am
         ecm_cms_folder_id: Ordner
         ecm_cms_folder: Ordner
+        filename: Dateiname
         format: Format
         handler: Handler
         layout: Layout

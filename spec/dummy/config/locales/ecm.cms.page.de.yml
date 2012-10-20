@@ -14,6 +14,7 @@ de:
         ecm_cms_folder: Ordner
         ecm_cms_navigation_items: Verlinkt von
         ecm_cms_navigation_item_ids: Verlinkt von
+        filename: Dateiname
         format: Format
         handler: Handler
         layout: Layout
