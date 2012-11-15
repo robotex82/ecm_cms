@@ -7,15 +7,21 @@ module Ecm
 
       context 'associations' do
         it { should belong_to :ecm_cms_navigation }
-        it { should belong_to :ecm_cms_page }        
+        it { should belong_to :ecm_cms_page }
+      end
+
+      context '#to_s' do
+        it 'should return the correct string' do
+          subject.to_s.should eq("#{subject.ecm_cms_navigation.to_s}: #{subject.name}")
+        end
       end
 
       context 'callbacks' do
         context '#update_navigation_from_parent' do
           it "should set the navigation from the parent item" do
             root = FactoryGirl.create :ecm_cms_navigation_item
-            foo  = FactoryGirl.create :ecm_cms_navigation_item, :parent => root         
-            
+            foo  = FactoryGirl.create :ecm_cms_navigation_item, :parent => root
+
             foo.valid?
             foo.ecm_cms_navigation.should eq(root.ecm_cms_navigation)
           end
@@ -24,12 +30,12 @@ module Ecm
         context '#update_children_navigations!' do
           it "should set the new navigation on all descendants" # do
 #            n1 = FactoryGirl.create :ecm_cms_navigation
-#            n2 = FactoryGirl.create :ecm_cms_navigation       
+#            n2 = FactoryGirl.create :ecm_cms_navigation
 #            foo = FactoryGirl.create :ecm_cms_navigation_item, :ecm_cms_navigation => n1
 #            bar = FactoryGirl.build :ecm_cms_navigation_item # , :parent => foo
 #            bar.parent = foo
 #            bar.save!
-#            
+#
 #            foo.ecm_cms_navigation = n2
 #            foo.save!
 #            bar.ecm_cms_navigation.should == n2
@@ -42,7 +48,7 @@ module Ecm
             locale = 'en'
             page = FactoryGirl.build :ecm_cms_page, :basename => basename, :locale => locale
             ni = FactoryGirl.build :ecm_cms_navigation_item, :url => nil, :ecm_cms_page => page
-            
+
             ni.valid?
             ni.url.should eq('/en/about-us')
           end
@@ -50,7 +56,7 @@ module Ecm
           it "should set the correct url for home pages" do
             page = FactoryGirl.build :ecm_cms_page, :pathname => '/', :basename => 'home', :locale => 'en'
             ni = FactoryGirl.build :ecm_cms_navigation_item, :url => nil, :ecm_cms_page => page
-            
+
             ni.valid?
             ni.url.should eq('/en')
           end
@@ -67,7 +73,7 @@ module Ecm
           navigation_item = FactoryGirl.build :ecm_cms_navigation_item_root, :ecm_cms_navigation => nil
           navigation_item.should_not be_valid
         end
-        
+
         it "should not validate presence of :ecm_cms_navigation if it is a child item" do
           navigation_item = FactoryGirl.build :ecm_cms_navigation_item_child, :ecm_cms_navigation => nil
           navigation_item.should be_valid
@@ -106,3 +112,4 @@ module Ecm
     end
   end
 end
+

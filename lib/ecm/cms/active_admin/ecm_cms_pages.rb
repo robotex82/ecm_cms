@@ -23,7 +23,7 @@ ActiveAdmin.register Ecm::Cms::Page do
 
     I18n.available_locales.each do |locale|
       Ecm::Cms::Navigation.where(:locale => locale).all.each do |navigation|
-        f.inputs do
+        f.inputs navigation.to_s do
           f.input :ecm_cms_navigation_items,
                   :as => :check_boxes,
                   :collection => navigation.ecm_cms_navigation_items.joins(:ecm_cms_navigation).where(:ecm_cms_navigations => { :locale => locale }),
@@ -42,7 +42,13 @@ ActiveAdmin.register Ecm::Cms::Page do
     column :title
     column :home_page?
     column :layout
-    column :ecm_cms_navigation_items
+    column(:ecm_cms_navigation_items) do |page|
+      output = ""
+      page.ecm_cms_navigation_items.each do |navigation_item|
+        output << link_to(navigation_item, [:admin, navigation_item])
+      end
+      output.html_safe
+    end
     column :created_at
     column :updated_at
     default_actions

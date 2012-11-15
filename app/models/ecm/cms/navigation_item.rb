@@ -57,6 +57,10 @@ class Ecm::Cms::NavigationItem < ActiveRecord::Base
     end
   end
 
+  def to_s
+    "#{ecm_cms_navigation}: #{name}"
+  end
+
   def update_navigation_from_parent!
     self.update_navigation_from_parent
     self.save!
