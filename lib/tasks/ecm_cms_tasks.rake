@@ -1,7 +1,7 @@
 # encoding: utf-8
-require 'ecm/cms/yaml_page_import'
-require 'ecm/cms/yaml_navigation_import'
-require 'ecm/cms/yaml_navigation_item_import'
+require 'ecm/cms/importers/page'
+require 'ecm/cms/importers/navigation'
+require 'ecm/cms/importers/navigation_item'
 
 namespace :ecm do
   namespace :cms do
