@@ -39,7 +39,6 @@ module Ecm
         def find_or_create_navigation(navigation_locale, navigation_name)
           navigation = Ecm::Cms::Navigation.where(:locale => navigation_locale, :name => navigation_name).first
           navigation = Ecm::Cms::Navigation.create!(:locale => navigation_locale, :name => navigation_name) if navigation.nil?
-          p navigation.inspect
           navigation
         end
 
