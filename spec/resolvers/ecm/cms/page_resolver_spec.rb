@@ -146,10 +146,13 @@ module Ecm
       end
 
       describe "#build_source" do
-        before(:each) do
+        before(:all) do
           RecordMock = Class.new do
             attr_accessor :body, :title, :meta_description 
           end
+        end
+
+        before(:each) do
           @record = RecordMock.new
           @record.body = 'foo'
           @record.title = 'bar'

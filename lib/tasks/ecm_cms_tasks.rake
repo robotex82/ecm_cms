@@ -1,4 +1,8 @@
 # encoding: utf-8
+require 'ecm/cms/yaml_page_import'
+require 'ecm/cms/yaml_navigation_import'
+require 'ecm/cms/yaml_navigation_item_import'
+
 namespace :ecm do
   namespace :cms do
     namespace :db do
@@ -64,12 +68,12 @@ namespace :ecm do
           :de => [
             { :name => 'i18n' },
             { :name => 'legal' },
-            { :name => 'main' }            
+            { :name => 'main' }
           ],
           :en => [
             { :name => 'i18n' },
             { :name => 'legal' },
-            { :name => 'main' }   
+            { :name => 'main' }
           ]
         }.with_indifferent_access
 
@@ -136,17 +140,17 @@ namespace :ecm do
         pages = {
           :en => [
             { :title => 'Home', :body => '<h1>Home (en)</h1>', :pathname => '/', :basename => 'home', :locale => 'en', :format => 'html', :handler => 'erb' },
-            { :title => 'Imprint', :body => '<h1>Imprint (en)</h1>', :pathname => '/', :basename => 'imprint', :locale => 'en', :format => 'html', :handler => 'erb' },            
+            { :title => 'Imprint', :body => '<h1>Imprint (en)</h1>', :pathname => '/', :basename => 'imprint', :locale => 'en', :format => 'html', :handler => 'erb' },
             { :title => 'About us', :body => '<h1>About us (en)</h1>', :pathname => '/', :basename => 'about-us', :locale => 'en', :format => 'html', :handler => 'erb' },
             { :title => 'Approach', :body => '<h1>Approach (en)</h1>', :pathname => '/', :basename => 'approach', :locale => 'en', :format => 'html', :handler => 'erb' },
-            { :title => 'Terms of Service', :body => '<h1>Terms of Service (en)</h1>', :pathname => '/', :basename => 'terms-of-service', :locale => 'en', :format => 'html', :handler => 'erb' }            
+            { :title => 'Terms of Service', :body => '<h1>Terms of Service (en)</h1>', :pathname => '/', :basename => 'terms-of-service', :locale => 'en', :format => 'html', :handler => 'erb' }
           ],
           :de => [
             { :title => 'Home', :body => '<h1>Home (de)</h1>', :pathname => '/', :basename => 'home', :locale => 'de', :format => 'html', :handler => 'erb' },
-            { :title => 'Impressum', :body => '<h1>Impressum (de)</h1>', :pathname => '/', :basename => 'impressum', :locale => 'de', :format => 'html', :handler => 'erb' },            
+            { :title => 'Impressum', :body => '<h1>Impressum (de)</h1>', :pathname => '/', :basename => 'impressum', :locale => 'de', :format => 'html', :handler => 'erb' },
             { :title => 'Über uns', :body => '<h1>Über uns (de)</h1>', :pathname => '/', :basename => 'ueber-uns', :locale => 'de', :format => 'html', :handler => 'erb' },
             { :title => 'Anfahrt', :body => '<h1>Anfahrt (de)</h1>', :pathname => '/', :basename => 'anfahrt', :locale => 'de', :format => 'html', :handler => 'erb' },
-            { :title => 'AGB', :body => '<h1>AGB (de)</h1>', :pathname => '/', :basename => 'agb', :locale => 'de', :format => 'html', :handler => 'erb' }            
+            { :title => 'AGB', :body => '<h1>AGB (de)</h1>', :pathname => '/', :basename => 'agb', :locale => 'de', :format => 'html', :handler => 'erb' }
           ]
         }.with_indifferent_access
 
@@ -167,5 +171,44 @@ namespace :ecm do
 
       end
     end
+
+    namespace :import do
+      desc "Imports navigations"
+      task :navigations, [] => [:environment] do |t, args|
+        I18n.available_locales.map(&:to_s).each do |locale|
+          filename = File.join(Rails.root, "import", "navigations.#{locale}.yml")
+          if File.exists?(filename)
+            data = File.open( filename ).read
+            navigations = Ecm::Cms::Importers::Navigation.new(data).navigations
+            navigations.map(&:save!)
+          end
+        end
+      end
+
+      desc "Imports navigation items"
+      task :navigation_items, [] => [:environment] do |t, args|
+        I18n.available_locales.map(&:to_s).each do |locale|
+          filename = File.join(Rails.root, "import", "navigation_items.#{locale}.yml")
+          if File.exists?(filename)
+            data = File.open( filename ).read
+            navigation_items = Ecm::Cms::Importers::NavigationItem.new(data).navigation_items
+            navigation_items.map(&:save!)
+          end
+        end
+      end
+
+      desc "Imports pages"
+      task :pages, [] => [:environment] do |t, args|
+        I18n.available_locales.map(&:to_s).each do |locale|
+          filename = File.join(Rails.root, "import", "pages.#{locale}.yml")
+          if File.exists?(filename)
+            data = File.open( filename ).read
+            pages = Ecm::Cms::Importers::Page.new(data).pages
+            pages.map(&:save!)
+          end
+        end
+      end
+    end
   end
 end
+

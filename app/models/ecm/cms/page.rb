@@ -29,9 +29,7 @@ class Ecm::Cms::Page < ActiveRecord::Base
   # validations
   validates :title, :presence => true
 
-  def home_page?
-p self.pathname
-p self.basename  
+  def home_page? 
     return self.pathname == '/' && self.basename == 'home'
   end
 

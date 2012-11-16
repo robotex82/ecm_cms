@@ -62,8 +62,8 @@ class Ecm::Cms::NavigationItem < ActiveRecord::Base
   end
 
   def update_navigation_from_parent!
-    self.update_navigation_from_parent
-    self.save!
+    update_navigation_from_parent
+    save!
   end
 
   def update_children_navigations!
