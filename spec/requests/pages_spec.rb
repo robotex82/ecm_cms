@@ -39,5 +39,21 @@ describe "localized home page" do
       response.body.should include(page_model.body)
     end
   end
+
+  describe "requesting text template" do
+    it "requesting /de/test.txt should succeed" do
+      page_model = Ecm::Cms::Page.create! do |page|
+        page.pathname = '/'
+        page.basename = 'test'
+        page.format   = 'text'
+        page.handler  = 'erb'
+        page.title    = 'Test'
+        page.body     = 'Example text template'
+      end
+      get "/de/test.txt"
+
+      response.body.should include(page_model.body)
+    end
+  end
 end
 

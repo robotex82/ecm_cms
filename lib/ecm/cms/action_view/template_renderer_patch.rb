@@ -16,7 +16,8 @@ module ActionView
             context.rendered_format = context.formats.first
           end
 
-          layout = template.layout ||= options[:layout]
+          layout = template.layout if template.respond_to?(:layout)
+          layout ||= options[:layout]
 
           render_template(template, layout, options[:locals])
         end
