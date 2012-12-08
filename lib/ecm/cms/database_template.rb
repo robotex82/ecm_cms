@@ -16,8 +16,10 @@ module Ecm
         base.after_save :clear_resolver_cache
 
         # validations
+        # base.validates :basename, :presence => true,
+        #                           :uniqueness => { :scope => [:ecm_cms_folder_id , :locale] }
         base.validates :basename, :presence => true,
-                                  :uniqueness => { :scope => [:ecm_cms_folder_id , :locale] }
+                                  :uniqueness =>  { :scope => [ :pathname, :locale, :format, :handler ] }
         base.validates :handler, :inclusion => ActionView::Template::Handlers.extensions.map(&:to_s)
         base.validates :locale, :inclusion => I18n.available_locales.map(&:to_s),
                                 :allow_nil => true,

@@ -20,6 +20,10 @@ require 'ecm/cms/resolvers/ecm/cms/page_resolver'
 require 'ecm/cms/resolvers/ecm/cms/template_resolver'
 require 'ecm/cms/resolvers/ecm/cms/partial_resolver'
 
+require 'ecm/cms/controller_extensions/page_resolver'
+require 'ecm/cms/controller_extensions/partial_resolver'
+require 'ecm/cms/controller_extensions/template_resolver'
+
 ::ActionView::Template.register_template_handler :textile, ::ActionView::Template::Handlers::Textile.new
 
 module Ecm

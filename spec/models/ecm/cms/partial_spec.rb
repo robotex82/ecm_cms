@@ -44,7 +44,7 @@ module Ecm
         # Removed test to respect adding a trailing slash to pathname before validation
         # if pathname is blank
         # it { should validate_presence_of :pathname }
-        it { should validate_uniqueness_of(:basename).scoped_to(:ecm_cms_folder_id) }
+        it { should validate_uniqueness_of(:basename).scoped_to([:pathname, :locale, :format, :handler]) }
 
         it { should ensure_inclusion_of(:format).in_array(Mime::SET.symbols.map(&:to_s)) }
         it { should_not allow_value('foo').for(:format) }

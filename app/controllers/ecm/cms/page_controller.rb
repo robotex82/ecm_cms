@@ -3,7 +3,7 @@ class Ecm::Cms::PageController < ApplicationController
   include RailsTools::I18nController
   
   # add the page resolver
-  append_view_path Ecm::Cms::PageResolver.instance unless view_paths.include?(Ecm::Cms::PageResolver.instance)
+  include Ecm::Cms::ControllerExtensions::PageResolver
 
   def respond
     render :template => params[:page]
