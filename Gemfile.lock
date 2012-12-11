@@ -9,7 +9,7 @@ GIT
 PATH
   remote: .
   specs:
-    ecm_cms (0.0.5.pre)
+    ecm_cms (0.0.6.pre)
       RedCloth
       active_admin-awesome_nested_set
       awesome_nested_set
