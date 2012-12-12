@@ -146,25 +146,38 @@ module Ecm
       end
 
       describe "#build_source" do
-        before(:all) do
-          RecordMock = Class.new do
-            attr_accessor :body, :title, :meta_description 
+#        before(:all) do
+#          RecordMock = Class.new do
+#            attr_accessor :body, :title, :meta_description 
+#          end
+#        end
+
+        before(:each) do
+          @sidebar_content_box = FactoryGirl.build(:ecm_cms_content_box, :name => 'sidebar')
+          @footer_content_box = FactoryGirl.build(:ecm_cms_content_box, :name => 'footer')
+          @page = Ecm::Cms::Page.new do |page|
+            page.body = 'foo'
+            page.title = 'bar'
+            page.meta_description = 'baz'
+            page.ecm_cms_page_content_blocks << FactoryGirl.build(:ecm_cms_page_content_block, :ecm_cms_page => page, :ecm_cms_content_box => @sidebar_content_box, :body => 'sidebar content')
+            page.ecm_cms_page_content_blocks << FactoryGirl.build(:ecm_cms_page_content_block, :ecm_cms_page => page, :ecm_cms_content_box => @footer_content_box, :body => 'footer content')
           end
         end
 
-        before(:each) do
-          @record = RecordMock.new
-          @record.body = 'foo'
-          @record.title = 'bar'
-          @record.meta_description = 'baz'
-        end
-
         it "should add a content for block for the title" do
-          subject.build_source(@record).should include("<% content_for :title do %>", "bar", "<% end %>")
+          subject.build_source(@page).should include("<% content_for :title do %>", "bar", "<% end %>")
         end
 
         it "should add a content for block for the meta description" do
-          subject.build_source(@record).should include("<% content_for :meta_description do %>", "baz", "<% end %>")
+          subject.build_source(@page).should include("<% content_for :meta_description do %>", "baz", "<% end %>")
+        end
+
+        it "should add a content for block for the associated sidebar content block" do
+          subject.build_source(@page).should include("<% content_for :footer do %>", "sidebar content", "<% end %>")
+        end
+
+        it "should add a content for block for the associated footer content block" do
+          subject.build_source(@page).should include("<% content_for :footer do %>", "footer content", "<% end %>")
         end
       end
     end

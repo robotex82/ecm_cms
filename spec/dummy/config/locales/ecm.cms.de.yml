@@ -7,3 +7,11 @@ de:
         messages:
           empty: Navigation  %{name} (%{lang}) ist leer
           not_found: Navigation %{name} (%{lang}) nicht gefunden
+  resources:
+    ecm_cms_folders: ordner
+    ecm_cms_navigations: navigationen
+    ecm_cms_navigation_items: navigationenseintraege
+    ecm_cms_pages: seiten
+    ecm_cms_partials: fragmente
+    ecm_cms_templates: vorlagen    
+

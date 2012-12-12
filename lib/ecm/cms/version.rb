@@ -1,5 +1,5 @@
 module Ecm
   module Cms
-    VERSION = "0.0.7.pre"
+    VERSION = "1.0.0.pre"
   end  
 end
