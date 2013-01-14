@@ -15,7 +15,7 @@ module Ecm
         else
           source = record.body
         end
-        content_for_title = "<% content_for :title do %>#{Ecm::Cms::Configuration.site_title} - #{record.title}<% end %>"
+        content_for_title = "<% content_for :title do %>#{record.title}<% end %>"
         content_for_meta_description = "<% content_for :meta_description do %>#{record.meta_description}<% end %>"
         source << content_for_title << content_for_meta_description
       end
