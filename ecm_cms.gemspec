@@ -20,7 +20,7 @@ Gem::Specification.new do |s|
   s.add_dependency "awesome_nested_set"
   s.add_dependency "draper"
   s.add_dependency "i18n_routing"
-  s.add_dependency "RedCloth"  
+  s.add_dependency "RedCloth"
   s.add_dependency "simple-navigation"
   s.add_dependency "simple-navigation-bootstrap"
 
@@ -35,8 +35,10 @@ Gem::Specification.new do |s|
 
   # Dummy app
   s.add_development_dependency 'activeadmin'
+  s.add_development_dependency 'less-rails'
   s.add_development_dependency 'sass-rails'
   s.add_development_dependency 'coffee-rails'
+  s.add_development_dependency 'therubyracer'
   s.add_development_dependency "twitter-bootstrap-rails"
 
   # Tests
