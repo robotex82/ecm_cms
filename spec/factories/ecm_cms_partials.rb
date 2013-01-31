@@ -1,6 +1,6 @@
 FactoryGirl.define do
   factory :ecm_cms_partial, :class => Ecm::Cms::Partial do
-    basename '_sidebar'
+    sequence(:basename) { |i| "_partial_#{i}" }
     handler 'erb'
     pathname '/'
   end

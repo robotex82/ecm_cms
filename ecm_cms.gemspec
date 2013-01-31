@@ -47,12 +47,8 @@ Gem::Specification.new do |s|
   s.add_development_dependency 'shoulda-matchers'
   s.add_development_dependency 'factory_girl_rails', '~> 1.0'
 
-  # Fake Data Generation
-  s.add_development_dependency 'ffaker'
-  s.add_development_dependency 'forgery'
-
   # Test automation
-  s.add_development_dependency 'rb-inotify', '~> 0.9.0'
+  s.add_development_dependency 'rb-inotify', '~> 0.8.8'
   # See gemfile for a patched version, for engine support.
   # s.add_development_dependency 'guard-rails'
   s.add_development_dependency 'guard-rspec'

@@ -35,8 +35,6 @@ ActiveAdmin.register Ecm::Cms::Partial do
 
   sidebar Ecm::Cms::Partial.human_attribute_name(:details), :only => :show do
     attributes_table_for ecm_cms_partial do
-p ecm_cms_partial.inspect
-      # row :folder
       row :pathname
       row :filename
       row :created_at
