@@ -5,15 +5,40 @@ module Ecm
   module Cms
     module Importers
       describe NavigationItem do
-        it 'should read yaml' do
-          yaml = <<YAML
+        context 'private methods' do
+          it '#yaml' do
+            yaml = <<YAML
 - apple
 - banana
 - carrot
 YAML
-          importer = Ecm::Cms::Importers::NavigationItem.new(yaml)
-          importer.yaml.should eq(['apple', 'banana', 'carrot'])
-        end
+            importer = Ecm::Cms::Importers::NavigationItem.new(yaml)
+            importer.send(:yaml).should eq(['apple', 'banana', 'carrot'])
+          end # it
+
+          describe '#find_or_create_navigation' do
+            before do
+              @importer = Ecm::Cms::Importers::NavigationItem.new('')
+            end # before
+
+            it 'should create a navigation for an unknown locale and name' do
+              @importer.send(:find_or_create_navigation, 'en', 'Example navigation')
+              Ecm::Cms::Navigation.count.should eq(1)
+            end # it
+            
+            describe 'with an existent navigation' do
+              before do
+                @navigation = FactoryGirl.create(:ecm_cms_navigation, :locale => 'en', :name => 'Example navigation')
+                @importer = Ecm::Cms::Importers::NavigationItem.new('')
+              end # before
+
+              it 'should not create a new navigation' do
+                @importer.send(:find_or_create_navigation, 'en', 'Example navigation')
+                Ecm::Cms::Navigation.count.should eq(1)
+              end # it
+            end # describe 'with an existent navigation'
+          end # describe '#find_or_create_navigation'
+        end # context 'private methods'
 
         context 'with valid yaml' do
           before do
