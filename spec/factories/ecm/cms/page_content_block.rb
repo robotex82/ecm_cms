@@ -5,3 +5,4 @@ FactoryGirl.define do
     ecm_cms_page
   end
 end
+

@@ -3,9 +3,9 @@ ActiveAdmin.register Ecm::Cms::Page do
   menu :parent => Proc.new { I18n.t('ecm.cms.active_admin.menu') }.call
 
   form do |f|
-    f.inputs do
-      f.object.errors.inspect
-    end
+#    f.inputs do
+#      f.object.errors.inspect
+#    end
 
     f.inputs do
       f.input :title
@@ -13,16 +13,16 @@ ActiveAdmin.register Ecm::Cms::Page do
       f.input :body
     end
 
-
+    f.inputs do
       f.has_many :ecm_cms_page_content_blocks do |cb|
         if cb.object.persisted?
           cb.input :_destroy, :as => :boolean, :label => I18n.t('active_admin.delete')
         end
 
-        cb.input :ecm_cms_content_box, :as => :radio
+        cb.input :ecm_cms_content_box
         cb.input :body
-
-      end if Ecm::Cms::ContentBox.count > 0
+      end
+    end if Ecm::Cms::ContentBox.count > 0
 
     f.inputs do
       f.input :pathname
@@ -73,7 +73,7 @@ ActiveAdmin.register Ecm::Cms::Page do
     panel Ecm::Cms::Page.human_attribute_name(:body) do
       pre { ecm_cms_page.body }
     end
-    
+
     ecm_cms_page.ecm_cms_page_content_blocks.each do |content_block|
       panel content_block.content_box_name do
         pre { content_block.body }

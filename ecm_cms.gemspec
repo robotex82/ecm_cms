@@ -15,12 +15,12 @@ Gem::Specification.new do |s|
 
   s.files = Dir["{app,config,db,lib}/**/*"] + ["MIT-LICENSE", "Rakefile", "README.rdoc"]
 
-  s.add_dependency "rails", "~> 3.2.8"
+  s.add_dependency "rails", "~> 3.2.12"
   s.add_dependency "active_admin-awesome_nested_set"
   s.add_dependency "awesome_nested_set"
   s.add_dependency "draper"
   s.add_dependency "i18n_routing"
-  s.add_dependency "RedCloth"  
+  s.add_dependency "RedCloth"
   s.add_dependency "simple-navigation"
   s.add_dependency "simple-navigation-bootstrap"
 
@@ -35,8 +35,10 @@ Gem::Specification.new do |s|
 
   # Dummy app
   s.add_development_dependency 'activeadmin'
-  s.add_development_dependency 'sass-rails'
   s.add_development_dependency 'coffee-rails'
+  s.add_development_dependency 'less-rails'
+  s.add_development_dependency 'sass-rails'
+  s.add_development_dependency 'therubyracer'
   s.add_development_dependency "twitter-bootstrap-rails"
 
   # Tests
@@ -45,12 +47,8 @@ Gem::Specification.new do |s|
   s.add_development_dependency 'shoulda-matchers'
   s.add_development_dependency 'factory_girl_rails', '~> 1.0'
 
-  # Fake Data Generation
-  s.add_development_dependency 'ffaker'
-  s.add_development_dependency 'forgery'
-
   # Test automation
-  s.add_development_dependency 'rb-inotify', '~> 0.8.8'
+  s.add_development_dependency 'rb-inotify', '~> 0.9'
   # See gemfile for a patched version, for engine support.
   # s.add_development_dependency 'guard-rails'
   s.add_development_dependency 'guard-rspec'
