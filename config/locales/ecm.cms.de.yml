@@ -5,13 +5,13 @@ de:
         menu: CMS
       navigation:
         messages:
-          empty: Navigation  %{name} (%{lang}) ist leer
-          not_found: Navigation %{name} (%{lang}) nicht gefunden
+          empty: Navigation  %{name} ist leer
+          not_found: Navigation %{name} nicht gefunden
   resources:
     ecm_cms_folders: ordner
     ecm_cms_navigations: navigationen
     ecm_cms_navigation_items: navigationenseintraege
     ecm_cms_pages: seiten
     ecm_cms_partials: fragmente
-    ecm_cms_templates: vorlagen    
+    ecm_cms_templates: vorlagen
 

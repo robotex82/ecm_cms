@@ -2,7 +2,6 @@ include ActiveAdmin::AwesomeNestedSet::Helper
 
 ActiveAdmin.register Ecm::Cms::Navigation do
   # Filters
-  filter :locale, :as => :select, :collection => I18n.available_locales.map(&:to_s)
   filter :name
 
   # Menu
@@ -10,7 +9,6 @@ ActiveAdmin.register Ecm::Cms::Navigation do
 
   form do |f|
     f.inputs do
-      f.input :locale, :as => :select, :collection => I18n.available_locales.map(&:to_s)
       f.input :name
     end
 
@@ -20,7 +18,6 @@ ActiveAdmin.register Ecm::Cms::Navigation do
   index do
     selectable_column
     column :name
-    column :locale
     default_actions
   end
 
@@ -50,7 +47,6 @@ ActiveAdmin.register Ecm::Cms::Navigation do
 
   sidebar Ecm::Cms::Navigation.human_attribute_name(:details), :only => :show do
     attributes_table_for ecm_cms_navigation do
-      row :locale
       row :name
       row :slug
       row :created_at

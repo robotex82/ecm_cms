@@ -30,6 +30,10 @@ class Ecm::Cms::NavigationItem < ActiveRecord::Base
   # default_scope
   default_scope :order => [:ecm_cms_navigation_id, :lft]
 
+  # i18n
+  translates :name,
+             :url
+
   # validations
   validates :key, :presence => true
   validates :name, :presence => true

@@ -20,13 +20,13 @@ module Ecm
 
       it "shows an warning on empty navigation" do
         name = 'main'
-        navigation = FactoryGirl.create :ecm_cms_navigation, :name => name, :locale => I18n.locale.to_s
+        navigation = FactoryGirl.create :ecm_cms_navigation, :name => name
         expect(helper.cms_render_navigation(name)).to eq(I18n.t('ecm.cms.navigation.messages.empty', {:lang => I18n.locale.to_s, :name => name.to_s}))
       end
 
       it "renders the navigation" do
         name = 'main'
-        navigation = FactoryGirl.create :ecm_cms_navigation, :name => name, :locale => I18n.locale.to_s
+        navigation = FactoryGirl.create :ecm_cms_navigation, :name => name
         items = [
           { :ecm_cms_navigation => navigation, :name => 'Home', :url => "/#{I18n.locale.to_s}/", :key => 'home', :options => nil },
           { :ecm_cms_navigation => navigation, :name => 'About us', :url => "/#{I18n.locale.to_s}/about-us", :key => 'about_us' , :options => nil },

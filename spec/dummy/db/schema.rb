@@ -67,8 +67,10 @@ ActiveRecord::Schema.define(:version => 20121212104254) do
   add_index "ecm_cms_folders", ["parent_id"], :name => "index_ecm_cms_folders_on_parent_id"
 
   create_table "ecm_cms_navigation_items", :force => true do |t|
-    t.string   "name"
-    t.string   "url"
+    t.string   "name_de"
+    t.string   "url_de"
+    t.string   "name_en"
+    t.string   "url_en"
     t.string   "key"
     t.string   "options"
     t.integer  "ecm_cms_navigation_id"
@@ -87,7 +89,6 @@ ActiveRecord::Schema.define(:version => 20121212104254) do
   add_index "ecm_cms_navigation_items", ["parent_id"], :name => "index_ecm_cms_navigation_items_on_parent_id"
 
   create_table "ecm_cms_navigations", :force => true do |t|
-    t.string   "locale"
     t.string   "name"
     t.string   "slug"
     t.datetime "created_at", :null => false

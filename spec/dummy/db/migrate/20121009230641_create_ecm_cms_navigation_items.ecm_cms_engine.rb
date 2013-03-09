@@ -2,8 +2,11 @@
 class CreateEcmCmsNavigationItems < ActiveRecord::Migration
   def change
     create_table :ecm_cms_navigation_items do |t|
-      t.string :name
-      t.string :url
+      t.translate_columns do |tc|
+        tc.string :name
+        tc.string :url
+      end
+
       t.string :key
       t.string :options
 
@@ -19,7 +22,9 @@ class CreateEcmCmsNavigationItems < ActiveRecord::Migration
       t.integer :depth
 
       # friendly id
-      t.string :slug
+      t.translate_columns do |tc|
+        t.string :slug
+      end
 
       t.timestamps
     end

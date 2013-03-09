@@ -31,12 +31,11 @@ feature 'Ecm::Cms::Navigation admin' do
   end
 
   def fill_new_form
-    select I18n.locale.to_s, :from => "ecm_cms_navigation[locale]"
     fill_in "ecm_cms_navigation[name]", :with => "Example navigation"
   end
 
   def fill_edit_form
-    fill_in "ecm_cms_navigation[name]", :with => "New navigation title"
+    fill_in "ecm_cms_navigation[name]", :with => "Updated navigation"
   end
 
   background do

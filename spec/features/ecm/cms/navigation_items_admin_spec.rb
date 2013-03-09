@@ -33,13 +33,13 @@ feature 'Ecm::Cms::NavigationItem admin' do
 
   def fill_new_form
     select @navigation.to_s, :from => 'ecm_cms_navigation_item[ecm_cms_navigation_id]'
-    fill_in 'ecm_cms_navigation_item[name]', :with => 'About us'
-    fill_in 'ecm_cms_navigation_item[url]', :with => '/about-us'
+    fill_in 'ecm_cms_navigation_item[name_en]', :with => 'About us'
+    fill_in 'ecm_cms_navigation_item[url_en]', :with => '/about-us'
     fill_in 'ecm_cms_navigation_item[key]', :with => 'about_us'
   end
 
   def fill_edit_form
-    fill_in "ecm_cms_navigation_item[name]", :with => "About"
+    fill_in "ecm_cms_navigation_item[name_en]", :with => "About"
   end
 
   background do

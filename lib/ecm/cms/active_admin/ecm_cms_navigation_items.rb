@@ -8,13 +8,18 @@ ActiveAdmin.register Ecm::Cms::NavigationItem do
   form do |f|
     f.inputs do
       f.input :ecm_cms_navigation, :collection => Ecm::Cms::Navigation.all.collect { |navigation| [navigation.to_s, navigation.id] }
-      f.input :parent
-      f.input :name      
+      f.input :parent    
     end
+
+    f.translate_inputs do |ti|
+      f.inputs do
+        ti.input :name
+        ti.input :url
+      end # f.inputs
+    end # f.translate_inputs
 
     f.inputs do
       f.input :ecm_cms_page
-      f.input :url
     end
 
     f.inputs do

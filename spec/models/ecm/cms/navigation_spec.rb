@@ -12,18 +12,19 @@ module Ecm
       context 'public methods' do
         context '#to_s' do
           it "should have the correct format" do
-            subject.locale = 'en'
-            subject.name = 'foo'            
-            subject.to_s.should eq('foo (en)')
+            subject.name = 'foo'
+            subject.to_s.should eq('foo')
           end
         end
       end
 
       context 'validations' do
         it { should validate_presence_of :name }
-        it { should validate_uniqueness_of(:name).scoped_to(:locale) }
-        it { should ensure_inclusion_of(:locale).in_array(I18n.available_locales.map(&:to_s)) }
+        it { should validate_uniqueness_of(:name) }
+#        it { should validate_uniqueness_of(:name).scoped_to(:locale) }
+#        it { should ensure_inclusion_of(:locale).in_array(I18n.available_locales.map(&:to_s)) }
       end
     end
   end
 end
+

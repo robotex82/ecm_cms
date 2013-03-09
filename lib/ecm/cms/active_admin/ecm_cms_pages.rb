@@ -36,14 +36,12 @@ ActiveAdmin.register Ecm::Cms::Page do
       f.input :layout
     end
 
-    I18n.available_locales.each do |locale|
-      Ecm::Cms::Navigation.where(:locale => locale).all.each do |navigation|
-        f.inputs navigation.to_s do
-          f.input :ecm_cms_navigation_items,
-                  :as => :check_boxes,
-                  :collection => navigation.ecm_cms_navigation_items.joins(:ecm_cms_navigation).where(:ecm_cms_navigations => { :locale => locale }),
-                  :label_method => :key # .all.collect { |i| "#{'--' * i.depth} #{i.name}" }
-        end
+    Ecm::Cms::Navigation.all.each do |navigation|
+      f.inputs navigation.to_s do
+        f.input :ecm_cms_navigation_items,
+                :as => :check_boxes,
+                :collection => navigation.ecm_cms_navigation_items.joins(:ecm_cms_navigation),
+                :label_method => :key # .all.collect { |i| "#{'--' * i.depth} #{i.name}" }
       end
     end
 
