@@ -3,10 +3,6 @@ ActiveAdmin.register Ecm::Cms::Page do
   menu :parent => Proc.new { I18n.t('ecm.cms.active_admin.menu') }.call
 
   form do |f|
-#    f.inputs do
-#      f.object.errors.inspect
-#    end
-
     f.inputs do
       f.input :title
       f.input :meta_description
@@ -36,15 +32,6 @@ ActiveAdmin.register Ecm::Cms::Page do
       f.input :layout
     end
 
-    Ecm::Cms::Navigation.all.each do |navigation|
-      f.inputs navigation.to_s do
-        f.input :ecm_cms_navigation_items,
-                :as => :check_boxes,
-                :collection => navigation.ecm_cms_navigation_items.joins(:ecm_cms_navigation),
-                :label_method => :key # .all.collect { |i| "#{'--' * i.depth} #{i.name}" }
-      end
-    end
-
     f.actions
   end
 
@@ -55,13 +42,6 @@ ActiveAdmin.register Ecm::Cms::Page do
     column :title
     column :home_page?
     column :layout
-    column(:ecm_cms_navigation_items) do |page|
-      output = ""
-      page.ecm_cms_navigation_items.each do |navigation_item|
-        output << link_to(navigation_item, [:admin, navigation_item])
-      end
-      output.html_safe
-    end
     column :created_at
     column :updated_at
     default_actions
@@ -81,8 +61,6 @@ ActiveAdmin.register Ecm::Cms::Page do
 
   sidebar Ecm::Cms::Page.human_attribute_name(:details), :only => :show do
     attributes_table_for ecm_cms_page do
-      # row :ecm_cms_navigation_item
-      # row :folder
       row :pathname
       row :filename
       row :home_page?

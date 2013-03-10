@@ -8,7 +8,6 @@ module Ecm
       context 'associations' do
         it { should belong_to :ecm_cms_folder }
         it { should have_many :ecm_cms_page_content_blocks }
-        it { should have_many :ecm_cms_navigation_items }
       end
 
       context 'callbacks' do
@@ -27,16 +26,6 @@ module Ecm
         context 'sets default locale on initialization' do
           before(:each) { I18n.locale = :de }
           its(:locale) { should eq(I18n.locale.to_s) }
-        end
-      end
-
-      context 'page callbacks' do
-        it "updates associated navigation items when the basename changes" do
-          navigation_item = FactoryGirl.create(:ecm_cms_navigation_item, :url => '/foo')
-          page = FactoryGirl.build :ecm_cms_page, :pathname => '/', :basename => 'bar', :locale => 'de'
-          page.ecm_cms_navigation_items << navigation_item
-          page.save!
-          navigation_item.url.should eq('/de/bar')
         end
       end
 

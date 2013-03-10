@@ -5,9 +5,6 @@ class Ecm::Cms::NavigationItem < ActiveRecord::Base
   belongs_to :ecm_cms_navigation,
              :class_name => 'Ecm::Cms::Navigation',
              :foreign_key => 'ecm_cms_navigation_id'
-  belongs_to :ecm_cms_page,
-             :class_name => 'Ecm::Cms::Page',
-             :foreign_key => 'ecm_cms_page_id'
 
   # attributes
   attr_accessible :depth,
@@ -24,7 +21,6 @@ class Ecm::Cms::NavigationItem < ActiveRecord::Base
 
   # callbacks
   before_validation :update_navigation_from_parent, :if => Proc.new { |ni| ni.child? }
-  before_validation :update_url_form_page, :if => Proc.new { |ni| ni.ecm_cms_page.present? && ni.url.blank? }
   after_save :update_children_navigations!
 
   # default_scope
@@ -74,28 +70,10 @@ class Ecm::Cms::NavigationItem < ActiveRecord::Base
     self.descendants.map(&:"update_navigation_from_parent!")
   end
 
-  def update_url_form_page!
-    # self.url = build_url_from_page(ecm_cms_page.locale, ecm_cms_page.pathname, ecm_cms_page.basename, ecm_cms_page.home_page?)
-    update_url_form_page
-    save!
-  end
-
   private
-
-  def build_url_from_page(locale, pathname, basename, is_home_page)
-    if is_home_page
-      "/#{locale}"
-    else
-      "/#{locale}#{pathname}#{basename}"
-    end
-  end
 
   def update_navigation_from_parent
     self.ecm_cms_navigation = self.parent.ecm_cms_navigation
-  end
-
-  def update_url_form_page
-    self.url = build_url_from_page(ecm_cms_page.locale, ecm_cms_page.pathname, ecm_cms_page.basename, ecm_cms_page.home_page?)
   end
 end
 
