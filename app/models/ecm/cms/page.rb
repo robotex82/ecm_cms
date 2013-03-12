@@ -3,7 +3,7 @@ module Ecm::Cms
     self.table_name = 'ecm_cms_pages'
 
     # add shared behaviour for database backed templates
-    include DatabaseTemplate
+    include DatabaseI18nTemplate
 
     # associations
     has_many :ecm_cms_page_content_blocks,
@@ -12,22 +12,31 @@ module Ecm::Cms
              :foreign_key => 'ecm_cms_page_id'
 
     # attributes
-    attr_accessible :basename,
-                    :body,
-                    :ecm_cms_folder_id,
+    I18n.available_locales.each do |locale|
+      attr_accessible "basename_#{locale}",
+                      "body_#{locale}",
+                      "meta_description_#{locale}",
+                      "pathname_#{locale}",
+                      "title_#{locale}"
+    end
+
+    attr_accessible :ecm_cms_folder_id,
                     :ecm_cms_navigation_item_ids,
                     :ecm_cms_page_content_blocks_attributes,
                     :format,
                     :handler,
-                    :layout,
-                    :locale,
-                    :meta_description,
-                    :pathname,
-                    :title
+                    :layout
     accepts_nested_attributes_for :ecm_cms_page_content_blocks, :allow_destroy => true
 
+    # i18n
+    translates :basename,
+               :body,
+               :meta_description,
+               :pathname,
+               :title
+
     # validations
-    validates :title, :presence => true
+    validates :title, :presence => true, :locales => :all
 
     def home_page?
       return self.pathname == '/' && self.basename == 'home'

@@ -31,14 +31,18 @@ feature 'Ecm::Cms::Page admin' do
   end
 
   def fill_new_form
-    fill_in 'ecm_cms_page[title]', :with => 'About us'
-    fill_in 'ecm_cms_page[pathname]', :with => '/'
-    fill_in 'ecm_cms_page[basename]', :with => 'about_us'
+    fill_in 'ecm_cms_page[title_en]', :with => 'About us'
+    fill_in 'ecm_cms_page[pathname_en]', :with => '/'
+    fill_in 'ecm_cms_page[basename_en]', :with => 'about-us'
+    fill_in 'ecm_cms_page[title_de]', :with => 'Über uns'
+    fill_in 'ecm_cms_page[pathname_de]', :with => '/'
+    fill_in 'ecm_cms_page[basename_de]', :with => 'ueber-uns'
     select 'erb', :from => 'ecm_cms_page[handler]'
   end
 
   def fill_edit_form
-    fill_in "ecm_cms_page[title]", :with => "About"
+    fill_in "ecm_cms_page[title_en]", :with => "Updated about us"
+    fill_in "ecm_cms_page[title_en]", :with => "Aktualisiertes Über uns"
   end
 
   background do

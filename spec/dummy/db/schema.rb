@@ -107,18 +107,22 @@ ActiveRecord::Schema.define(:version => 20121212104254) do
   add_index "ecm_cms_page_content_blocks", ["ecm_cms_page_id"], :name => "index_ecm_cms_page_content_blocks_on_ecm_cms_page_id"
 
   create_table "ecm_cms_pages", :force => true do |t|
-    t.string   "basename"
-    t.string   "pathname"
-    t.string   "title"
-    t.text     "meta_description"
-    t.text     "body"
+    t.string   "basename_de"
+    t.string   "pathname_de"
+    t.string   "title_de"
+    t.text     "meta_description_de"
+    t.text     "body_de"
+    t.string   "basename_en"
+    t.string   "pathname_en"
+    t.string   "title_en"
+    t.text     "meta_description_en"
+    t.text     "body_en"
     t.string   "layout"
-    t.string   "locale"
     t.string   "format"
     t.string   "handler"
     t.integer  "ecm_cms_folder_id"
-    t.datetime "created_at",        :null => false
-    t.datetime "updated_at",        :null => false
+    t.datetime "created_at",          :null => false
+    t.datetime "updated_at",          :null => false
   end
 
   add_index "ecm_cms_pages", ["ecm_cms_folder_id"], :name => "index_ecm_cms_pages_on_ecm_cms_folder_id"

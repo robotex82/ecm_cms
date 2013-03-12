@@ -16,6 +16,7 @@ require 'ecm/cms/routing'
 
 # require 'ecm/cms/database_resolver'
 require 'ecm/cms/database_template'
+require 'ecm/cms/database_i18n_template'
 
 require 'ecm/cms/resolvers/ecm/cms/page_resolver'
 require 'ecm/cms/resolvers/ecm/cms/template_resolver'

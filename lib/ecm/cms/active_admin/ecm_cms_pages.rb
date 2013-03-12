@@ -3,10 +3,14 @@ ActiveAdmin.register Ecm::Cms::Page do
   menu :parent => Proc.new { I18n.t('ecm.cms.active_admin.menu') }.call
 
   form do |f|
-    f.inputs do
-      f.input :title
-      f.input :meta_description
-      f.input :body
+    f.translate_inputs do |ti|
+      f.inputs do
+        ti.input :title
+        ti.input :meta_description
+        ti.input :body
+        ti.input :pathname
+        ti.input :basename
+      end
     end
 
     f.inputs do
@@ -21,9 +25,6 @@ ActiveAdmin.register Ecm::Cms::Page do
     end if Ecm::Cms::ContentBox.count > 0
 
     f.inputs do
-      f.input :pathname
-      f.input :basename
-      f.input :locale, :as => :select, :collection => I18n.available_locales.map(&:to_s)
       f.input :format, :as => :select, :collection => Mime::SET.symbols.map(&:to_s)
       f.input :handler, :as => :select, :collection => ActionView::Template::Handlers.extensions.map(&:to_s)
     end

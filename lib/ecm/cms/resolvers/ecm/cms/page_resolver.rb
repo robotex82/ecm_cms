@@ -1,4 +1,4 @@
-require 'ecm/cms/database_resolver'
+require 'ecm/cms/database_i18n_resolver'
 
 module Ecm
   module Cms
@@ -7,7 +7,7 @@ module Ecm
       include Singleton
 
       # add shared behaviour for database backed templates
-      include Ecm::Cms::DatabaseResolver
+      include Ecm::Cms::DatabaseI18nResolver
 
       def build_source(record)
         output = ''
