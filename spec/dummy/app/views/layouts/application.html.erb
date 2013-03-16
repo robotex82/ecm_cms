@@ -62,14 +62,28 @@
         <div class="row">
            <div class="span9">
               <%= yield %>
+              <% if content_for?(:feature_box_1) %>
+              <div class="well" id="feature_box_1">
+                <%= yield(:feature_box_1) %>
+              </div>
+              <% end %>
+              <% if content_for?(:feature_box_2) %>
+              <div class="well" id="feature_box_2">
+                <%= yield(:feature_box_2) %>
+              </div>
+              <% end %>
             </div>
             <div class="span3">
               <div class="well sidebar-nav">
-                <h3>Sidebar</h3>
-                <ul class="nav nav-list">
-                  <li class="nav-header">Sidebar</li>
-                </ul>
-                <%= cms_render_navigation 'main', :levels => 3, :expand_all => true, :container_class => 'nav' %>
+                <% if content_for?(:sidebar) %>
+                  <%= yield(:sidebar) %>
+                <% else %>
+                  <h3>Sidebar</h3>
+                  <ul class="nav nav-list">
+                    <li class="nav-header">Sidebar</li>
+                  </ul>
+                  <%= cms_render_navigation 'main', :levels => 3, :expand_all => true, :container_class => 'nav' %>
+                <% end %>
               </div><!--/.well -->
             </div><!--/span-->
         </div><!--/row-->

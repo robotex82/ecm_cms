@@ -8,8 +8,7 @@ class Ecm::Cms::PageController < ApplicationController
   # avoid error 500 on missing template
   rescue_from ActionView::MissingTemplate do
     respond_to do |format|
-      # format.html { render(:file => "#{Rails.root}/public/404.html", :layout => false, :status => 404) }
-      format.html { render(:file => "#{Rails.root}/public/404", :formats => [:html], :status => 404, :layout => false) }
+      format.html { render(:file => "#{Rails.root}/public/404", :formats => [:html], :layout => false, :status => 404) }
       format.xml  { head :not_found }
       format.any  { head :not_found }
     end

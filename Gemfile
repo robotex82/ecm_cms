@@ -17,7 +17,7 @@ gem "jquery-rails"
 # gem 'ruby-debug'
 
 # Edge active admin
-# gem 'activeadmin', :git => 'git://github.com/gregbell/active_admin.git'
+gem 'activeadmin', :git => 'git://github.com/gregbell/active_admin.git'
 
 # Patched guard rails
 gem 'guard-rails',  :git => 'git://github.com/robotex82/guard-rails.git', :branch => 'better-engine-support'

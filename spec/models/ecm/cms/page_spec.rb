@@ -7,6 +7,7 @@ module Ecm
 
       context 'associations' do
         it { should belong_to :ecm_cms_folder }
+        it { should have_many :ecm_cms_page_content_blocks }
         it { should have_many :ecm_cms_navigation_items }
       end
 
@@ -59,11 +60,11 @@ module Ecm
 
       context '#filename' do
         subject { Ecm::Cms::Page.new }
-        
+
         it "builds foo.html from basename => foo, handler => html" do
           subject.basename = 'foo'
           subject.locale   = nil
-          subject.handler  = 'html'       
+          subject.handler  = 'html'
 
           subject.filename.should eq('foo.html')
         end
@@ -104,3 +105,4 @@ module Ecm
     end
   end
 end
+

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121009230641) do
+ActiveRecord::Schema.define(:version => 20121212104254) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.string   "resource_id",   :null => false
@@ -44,6 +44,12 @@ ActiveRecord::Schema.define(:version => 20121009230641) do
 
   add_index "admin_users", ["email"], :name => "index_admin_users_on_email", :unique => true
   add_index "admin_users", ["reset_password_token"], :name => "index_admin_users_on_reset_password_token", :unique => true
+
+  create_table "ecm_cms_content_boxes", :force => true do |t|
+    t.string   "name"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
 
   create_table "ecm_cms_folders", :force => true do |t|
     t.string   "basename"
@@ -87,6 +93,17 @@ ActiveRecord::Schema.define(:version => 20121009230641) do
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
+
+  create_table "ecm_cms_page_content_blocks", :force => true do |t|
+    t.text     "body"
+    t.integer  "ecm_cms_page_id"
+    t.integer  "ecm_cms_content_box_id"
+    t.datetime "created_at",             :null => false
+    t.datetime "updated_at",             :null => false
+  end
+
+  add_index "ecm_cms_page_content_blocks", ["ecm_cms_content_box_id"], :name => "index_ecm_cms_page_content_blocks_on_ecm_cms_content_box_id"
+  add_index "ecm_cms_page_content_blocks", ["ecm_cms_page_id"], :name => "index_ecm_cms_page_content_blocks_on_ecm_cms_page_id"
 
   create_table "ecm_cms_pages", :force => true do |t|
     t.string   "basename"

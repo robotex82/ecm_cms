@@ -22,3 +22,4 @@ class Ecm::Cms::Navigation < ActiveRecord::Base
     "#{self.name} (#{self.locale})"
   end
 end
+

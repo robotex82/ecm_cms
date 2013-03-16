@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-feature 'Ecm::Cms::NavigationItem admin' do
+feature 'Ecm::Cms::ContentBox admin' do
   include ActiveAdmin::SignInHelper
 
   def set_locale
@@ -12,11 +12,11 @@ feature 'Ecm::Cms::NavigationItem admin' do
   end
 
   def set_resource_path
-    @resource_path = "ecm_cms_navigation_items"
+    @resource_path = "ecm_cms_content_boxes"
   end
 
   def set_resource_class
-    @resource_class = Ecm::Cms::NavigationItem
+    @resource_class = Ecm::Cms::ContentBox
   end
 
   def set_resource_factory_name
@@ -28,18 +28,14 @@ feature 'Ecm::Cms::NavigationItem admin' do
   end
 
   def prepare_for_new
-    @navigation = FactoryGirl.create(:ecm_cms_navigation)
   end
 
   def fill_new_form
-    select @navigation.to_s, :from => 'ecm_cms_navigation_item[ecm_cms_navigation_id]'
-    fill_in 'ecm_cms_navigation_item[name]', :with => 'About us'
-    fill_in 'ecm_cms_navigation_item[url]', :with => '/about-us'
-    fill_in 'ecm_cms_navigation_item[key]', :with => 'about_us'
+    fill_in "ecm_cms_content_box[name]", :with => "Example content box"
   end
 
   def fill_edit_form
-    fill_in "ecm_cms_navigation_item[name]", :with => "About"
+    fill_in "ecm_cms_content_box[name]", :with => "Updated content box"
   end
 
   background do

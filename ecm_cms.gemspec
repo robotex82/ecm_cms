@@ -15,7 +15,7 @@ Gem::Specification.new do |s|
 
   s.files = Dir["{app,config,db,lib}/**/*"] + ["MIT-LICENSE", "Rakefile", "README.rdoc"]
 
-  s.add_dependency "rails", "~> 3.2.11"
+  s.add_dependency "rails", "~> 3.2.12"
   s.add_dependency "active_admin-awesome_nested_set"
   s.add_dependency "awesome_nested_set"
   s.add_dependency "draper"
@@ -34,10 +34,10 @@ Gem::Specification.new do |s|
   s.add_development_dependency "yard"
 
   # Dummy app
-  s.add_development_dependency 'activeadmin'
+  # s.add_development_dependency 'activeadmin'
+  s.add_development_dependency 'coffee-rails'
   s.add_development_dependency 'less-rails'
   s.add_development_dependency 'sass-rails'
-  s.add_development_dependency 'coffee-rails'
   s.add_development_dependency 'therubyracer'
   s.add_development_dependency "twitter-bootstrap-rails"
 
@@ -48,7 +48,7 @@ Gem::Specification.new do |s|
   s.add_development_dependency 'factory_girl_rails', '~> 1.0'
 
   # Test automation
-  s.add_development_dependency 'rb-inotify', '~> 0.8.8'
+  s.add_development_dependency 'rb-inotify', '~> 0.9'
   # See gemfile for a patched version, for engine support.
   # s.add_development_dependency 'guard-rails'
   s.add_development_dependency 'guard-rspec'
