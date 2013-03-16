@@ -14,6 +14,7 @@ module Ecm::Cms
     validates :body, :presence => true
     validates :ecm_cms_content_box, :presence => true
     validates :ecm_cms_page, :presence => true
+    # validates :ecm_cms_page, :existence => true
 
     def content_box_name
       ecm_cms_content_box.name

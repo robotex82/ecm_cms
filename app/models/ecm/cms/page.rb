@@ -13,7 +13,8 @@ module Ecm::Cms
     has_many :ecm_cms_page_content_blocks,
              :class_name => 'Ecm::Cms::Page::ContentBlock',
              :dependent => :destroy,
-             :foreign_key => 'ecm_cms_page_id'           
+             :foreign_key => 'ecm_cms_page_id',
+             :inverse_of => :ecm_cms_page          
 
     # attributes
     attr_accessible :basename,

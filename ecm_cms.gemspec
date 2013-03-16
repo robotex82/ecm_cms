@@ -34,7 +34,7 @@ Gem::Specification.new do |s|
   s.add_development_dependency "yard"
 
   # Dummy app
-  s.add_development_dependency 'activeadmin'
+  # s.add_development_dependency 'activeadmin'
   s.add_development_dependency 'coffee-rails'
   s.add_development_dependency 'less-rails'
   s.add_development_dependency 'sass-rails'

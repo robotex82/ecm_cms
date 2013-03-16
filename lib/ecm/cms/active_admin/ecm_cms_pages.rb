@@ -13,15 +13,15 @@ ActiveAdmin.register Ecm::Cms::Page do
       f.input :body
     end
 
-    f.inputs do
-      f.has_many :ecm_cms_page_content_blocks do |cb|
+    f.has_many :ecm_cms_page_content_blocks do |cb|
+      # cb.inputs do
         if cb.object.persisted?
           cb.input :_destroy, :as => :boolean, :label => I18n.t('active_admin.delete')
         end
 
         cb.input :ecm_cms_content_box
         cb.input :body
-      end
+      # end
     end if Ecm::Cms::ContentBox.count > 0
 
     f.inputs do
