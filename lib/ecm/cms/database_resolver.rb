@@ -63,7 +63,7 @@ module Ecm
           :virtual_path => "#{record.pathname}#{record.basename}"
         }
 
-        details[:layout] = record.layout if record.layout.present?
+        details[:layout] = record.layout if record.respond_to?(:layout) && record.layout.present?
 
         ::ActionView::Template.new(source, identifier, handler, details)
       end
