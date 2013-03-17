@@ -4,7 +4,7 @@ module Ecm
       module PageResolver
         def self.included(base)
           # add the page resolver
-          base.append_view_path ::Ecm::Cms::PageResolver.instance unless base.view_paths.include?(::Ecm::Cms::PageResolver.instance)
+          base.prepend_view_path ::Ecm::Cms::PageResolver.instance unless base.view_paths.include?(::Ecm::Cms::PageResolver.instance)
         end
       end
     end

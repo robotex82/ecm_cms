@@ -4,7 +4,7 @@ module Ecm
       module TemplateResolver
         def self.included(base)
           # add the template resolver
-          base.append_view_path ::Ecm::Cms::TemplateResolver.instance unless base.view_paths.include?(::Ecm::Cms::TemplateResolver.instance)
+          base.prepend_view_path ::Ecm::Cms::TemplateResolver.instance unless base.view_paths.include?(::Ecm::Cms::TemplateResolver.instance)
         end
       end
     end
