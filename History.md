@@ -1,3 +1,11 @@
+
+1.0.1.pre / 2013-03-17 
+==================
+
+  * Fixed: Template resolver calling layout on templates causing method not found.
+  * Fixed: pages, partials and templates from the database not being preferred.
+  * Added history file
+  
 n.n.n / 2013-03-16 
 ==================
 
