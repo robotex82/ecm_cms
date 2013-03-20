@@ -53,7 +53,7 @@ ActiveAdmin.register Ecm::Cms::Page do
   index do
     selectable_column
     column :pathname
-    column :filename
+    column :filename, :sortable => :basename
     column :title
     column :home_page?
     column :layout
