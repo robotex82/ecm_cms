@@ -1,4 +1,10 @@
 
+1.0.2.pre / 2013-03-20 
+==================
+
+  * Fixed: Sorting of pages by filename
+  * Fixed: Width of page in admin show views
+
 1.0.1.pre / 2013-03-17 
 ==================
 
