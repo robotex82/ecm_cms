@@ -1,4 +1,10 @@
 
+1.0.3.pre / 2013-03-24 
+==================
+
+  * Fixed: Shoulda integration
+  * Enhancement: Indented navigation items in the admin area.
+
 1.0.2.pre / 2013-03-20 
 ==================
 
