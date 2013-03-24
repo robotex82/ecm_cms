@@ -1,1 +1,1 @@
-require 'shoulda/matchers'
+require 'shoulda-matchers'

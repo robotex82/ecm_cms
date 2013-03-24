@@ -28,7 +28,7 @@ ActiveAdmin.register Ecm::Cms::Navigation do
     panel Ecm::Cms::Navigation.human_attribute_name(:ecm_cms_navigation_items) do
       table_for ecm_cms_navigation.ecm_cms_navigation_items, :i18n => Ecm::Cms::NavigationItem do
         sortable_tree_columns
-        column :name
+        sortable_tree_indented_column :name
         column :url
         column :ecm_cms_page do |ni|
           if ni.ecm_cms_page.blank?

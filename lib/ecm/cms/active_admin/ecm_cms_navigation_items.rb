@@ -29,7 +29,7 @@ ActiveAdmin.register Ecm::Cms::NavigationItem do
     selectable_column
     sortable_tree_columns
     column(:ecm_cms_navigation) { |ni| link_to(ni.ecm_cms_navigation.to_s, [:admin, ni.ecm_cms_navigation]) } 
-    column :name
+    sortable_tree_indented_column :name
     column :url
     column :ecm_cms_page do |ni|
       if ni.ecm_cms_page.blank?
