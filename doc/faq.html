@@ -1,0 +1,62 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta name="generator" content="pandoc" />
+  <title></title>
+  <style type="text/css">code{white-space: pre;}</style>
+  <link rel="stylesheet" href="stylesheets/markdown.css" type="text/css" />
+</head>
+<body>
+<h1 id="faq">FAQ</h1>
+<h2 id="how-do-i-create-a-new-layout">How do I create a new layout?</h2>
+<p>To create a new layout, you need to save it as a template in the /layouts/ path.</p>
+<p>Step my step instructions:</p>
+<h3 id="chose-templates-from-the-admin-area">1. Chose ‘templates’ from the admin area:</h3>
+<div class="figure">
+<img src="images/create_a_template_step_1.png" alt="Create a template - step 1" /><p class="caption">Create a template - step 1</p>
+</div>
+<h3 id="click-new-template">2. Click ‘New template’:</h3>
+<div class="figure">
+<img src="images/create_a_template_step_2.png" alt="Create a template - step 2" /><p class="caption">Create a template - step 2</p>
+</div>
+<h3 id="add-the-template-body-and-settings">3. Add the template body and settings:</h3>
+<div class="figure">
+<img src="images/create_a_template_step_3.png" alt="Create a template - step 3" /><p class="caption">Create a template - step 3</p>
+</div>
+<h3 id="click-create-template">4. Click ‘Create template’:</h3>
+<div class="figure">
+<img src="images/create_a_template_step_4.png" alt="Create a template - step 4" /><p class="caption">Create a template - step 4</p>
+</div>
+<h2 id="how-do-i-use-a-specific-layout-for-a-page">How do I use a specific layout for a page?</h2>
+<p>To use a specific layout for a page, you need to specify its name in the settings.</p>
+<p>Step my step instructions:</p>
+<p>Assume you have the page foo.textile, and you want it to use the layout ‘my_layout’:</p>
+<h3 id="go-to-the-page-and-edit-it">1. Go to the page and edit it:</h3>
+<div class="figure">
+<img src="images/go_to_the_page_and_edit_it_step_1.PNG" alt="Edit a page - step 1" /><p class="caption">Edit a page - step 1</p>
+</div>
+<div class="figure">
+<img src="images/go_to_the_page_and_edit_it_step_2.PNG" alt="Edit a page - step 2" /><p class="caption">Edit a page - step 2</p>
+</div>
+<h3 id="change-the-layout-to-my_layout">2. Change the layout to ‘my_layout’</h3>
+<div class="figure">
+<img src="images/change_the_layout_step_1.PNG" alt="Change the layout - step 1" /><p class="caption">Change the layout - step 1</p>
+</div>
+<h2 id="how-do-i-use-layouts-from-the-database">How do I use layouts from the database?</h2>
+<p>You can follow the steps in:</p>
+<ul>
+<li>How do I create a new layout?</li>
+<li>How do I use a specific layout for a page?</li>
+</ul>
+<p>Please note following things:</p>
+<p>You need to be using version 1.0.3.pre or greater.</p>
+<p>You need to include the template resolver in the application controller to do this:</p>
+<pre><code># app/controllers/application_controller.rb
+class ApplicationController &lt; ActionController::Base
+  include Ecm::Cms::ControllerExtensions::TemplateResolver
+  ...
+end</code></pre>
+</body>
+</html>
