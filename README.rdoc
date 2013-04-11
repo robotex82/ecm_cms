@@ -2,7 +2,8 @@
 
 = End-User documentation
 
-Please look at the [docs Folder](docs/).
+Please look at the docs[link:docs/].
+
 
 = Prerequisites
 
