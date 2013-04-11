@@ -1,5 +1,9 @@
 = ECM Module Template
 
+= End-User documentation
+
+Please look at the [docs Folder](docs/).
+
 = Prerequisites
 
   * rails ~> 3.2.8
