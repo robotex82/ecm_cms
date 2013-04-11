@@ -2,7 +2,7 @@
 
 = End-User documentation
 
-Please look at the docs[link:docs/].
+Please look at the[link:doc/]-Folder.
 
 
 = Prerequisites
