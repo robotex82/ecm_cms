@@ -63,3 +63,57 @@ class ApplicationController < ActionController::Base
   ...
 end
 ```
+
+## How do I create a navigation with a drop-down menu?
+
+You can follow the steps in:
+
+  * How do I create a nested sub-navigation item?
+  * How do I set the navigation level to get a drop-down navigation?
+
+
+## How do I create a nested sub-navigation item?
+
+Assuming you have a navigation "main (en)", and a navigation item "products". And you want a new sub-item called "cars":
+
+### 1. Chose 'navigation items' from the admin area:
+
+![How do I create a nested sub-navigation item - step 1](images/how_do_i_create_a_nested_sub_navigation_item_step_1.png)
+
+### 2. Click 'New navigation item':
+
+![How do I create a nested sub-navigation item - step 2](images/how_do_i_create_a_nested_sub_navigation_item_step_2.png)
+
+### 3. Select "main (en)" from navigations:
+
+![How do I create a nested sub-navigation item - step 3](images/how_do_i_create_a_nested_sub_navigation_item_step_3.png)
+
+### 4. Select "products" as parent item:
+
+![How do I create a nested sub-navigation item - step 4](images/how_do_i_create_a_nested_sub_navigation_item_step_4.png)
+
+### 5. Create the navigation item:
+
+![How do I create a nested sub-navigation item - step 5](images/how_do_i_create_a_nested_sub_navigation_item_step_5.png)
+
+
+## How do I set the navigation level to get a drop-down navigation?
+
+Setting the navigation level is done in the layout. Assume you have a navigation "main (en)" with following structure:
+
+* products
+    * cars
+    * trucks
+
+If you want to show a drop down menu with the second level of the navigation, you have to set the level option:
+
+```
+# layouts/frontend.html.erb
+...
+<%= cms_render_navigation :main, :expand_all => true, :renderer => :bootstrap, :level => 1..2 %>
+...
+```
+
+This will give you a nice drop down menu:
+
+![How do I set the navigation level to get a drop-down navigation - result](images/how_do_i_set_the_navigation_level_to_get_a_drop_down_navigation_result.png)
