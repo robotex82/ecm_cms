@@ -1,7 +1,15 @@
 
-1.0.3.pre / 2013-03-24 
-==================
+1.0.3.pre / 2013-06-06 
+======================
 
+  * Fixed: Page Controller did not include the partial resolver.
+  * Enhancement: Better docs
+  * Fixed end user doc link.
+  * Fixed end user doc link.
+  * Fixed end user doc link.
+  * Fixed end user doc link.
+  * Better readme.
+  * Enhancement: Added docs
   * Fixed: Shoulda integration
   * Enhancement: Indented navigation items in the admin area.
 
