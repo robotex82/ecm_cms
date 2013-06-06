@@ -11,13 +11,13 @@
   * Enhancement: Indented navigation items in the admin area.
 
 1.0.2.pre / 2013-03-20 
-==================
+======================
 
   * Fixed: Sorting of pages by filename
   * Fixed: Width of page in admin show views
 
 1.0.1.pre / 2013-03-17 
-==================
+======================
 
   * Fixed: Template resolver calling layout on templates causing method not found.
   * Fixed: pages, partials and templates from the database not being preferred.
