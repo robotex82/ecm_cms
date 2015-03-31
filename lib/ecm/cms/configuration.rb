@@ -9,14 +9,25 @@ module Ecm
         yield self
       end
 
-      mattr_accessor :default_handlers
-      @@default_handlers = {}
+      mattr_accessor :base_controller do
+        'ApplicationController'
+      end
+
+      mattr_accessor :default_handlers do
+        HashWithIndifferentAccess.new()
+      end
+
+      mattr_accessor :site_title do
+        ''
+      end
+
+      def base_controller=(base_controller)
+        @@base_controller = base_controller.constantize
+      end
+
       def default_handlers=(default_handlers)
         @@default_handlers = HashWithIndifferentAccess.new(default_handlers)
       end
-
-      mattr_accessor :site_title
-      @@site_title = ''
     end
   end
 end

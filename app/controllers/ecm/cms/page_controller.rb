@@ -1,4 +1,4 @@
-class Ecm::Cms::PageController < ApplicationController
+class Ecm::Cms::PageController < Ecm::Cms::Configuration.base_controller
   # inject locale to params and vice versa
   include RailsTools::I18nController
 

@@ -4,4 +4,6 @@ Ecm::Cms.configure do |config|
     :partial => :texterb,
     :template => :texterb
   }
+
+  config.base_controller = 'ApplicationController'
 end
