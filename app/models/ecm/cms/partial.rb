@@ -10,14 +10,14 @@ class Ecm::Cms::Partial < ActiveRecord::Base
 #             :foreign_key => 'ecm_cms_folder_id'
 
   # attributes
-  attr_accessible :basename,
+  attr_accessible(:basename,
                   :body,
                   :ecm_cms_folder_id,
                   :format,
                   :handler,
                   :layout,
                   :locale,
-                  :pathname
+                  :pathname) if Rails.version < '4.0.0'
 
   # callbacks
   before_validation :ensure_basename_starts_with_underscore, :if => Proc.new { |t| t.basename.present? }

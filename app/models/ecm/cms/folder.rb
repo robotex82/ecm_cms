@@ -16,13 +16,13 @@ class Ecm::Cms::Folder < ActiveRecord::Base
            :foreign_key => 'ecm_cms_folder_id'
 
   # attributes
-  attr_accessible :basename,
+  attr_accessible(:basename,
                   :children_count,
                   :depth,
                   :ecm_cms_templates_count,
                   :lft,
                   :pathname,
-                  :rgt
+                  :rgt) if Rails.version < '4.0.0'
 
   # validations
   validates :basename, :presence => true

@@ -1,4 +1,12 @@
 ActiveAdmin.register Ecm::Cms::Partial do
+  permit_params(:basename,
+                :body,
+                :ecm_cms_folder_id,
+                :format,
+                :handler,
+                :layout,
+                :locale,
+                :pathname) if Rails.version < '4.0.0'
   # Menu
   menu :parent => Proc.new { I18n.t('ecm.cms.active_admin.menu') }.call
 
@@ -24,7 +32,7 @@ ActiveAdmin.register Ecm::Cms::Partial do
     column :filename
     column :created_at
     column :updated_at
-    default_actions
+    ActiveAdmin::VERSION[0] < '1' ? default_actions : actions
   end
 
   show do

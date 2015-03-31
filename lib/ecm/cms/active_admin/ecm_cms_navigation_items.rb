@@ -1,5 +1,11 @@
 ActiveAdmin.register Ecm::Cms::NavigationItem do
-  # Add member actions for positioning.
+  permit_params(:depth,
+                :key,
+                :name,
+                :options,
+                :string,
+                :url) if Rails.version < '4.0.0'
+
   sortable_tree_member_actions
 
   # Menu
@@ -40,6 +46,6 @@ ActiveAdmin.register Ecm::Cms::NavigationItem do
     end
     column :created_at
     column :updated_at
-    default_actions
+    ActiveAdmin::VERSION[0] < '1' ? default_actions : actions
   end
 end

@@ -1,5 +1,6 @@
 ActiveAdmin.register Ecm::Cms::ContentBox do
-  # Menu
+  permit_params(:name) if Rails.version >= '4.0.0'
+
   menu :parent => Proc.new { I18n.t('ecm.cms.active_admin.menu') }.call
 
   index do
@@ -7,7 +8,7 @@ ActiveAdmin.register Ecm::Cms::ContentBox do
     column :name
     column :created_at
     column :updated_at    
-    default_actions
+    ActiveAdmin::VERSION[0] < '1' ? default_actions : actions
   end
 
   show do

@@ -10,14 +10,14 @@ class Ecm::Cms::NavigationItem < ActiveRecord::Base
              :foreign_key => 'ecm_cms_page_id'
 
   # attributes
-  attr_accessible :depth,
+  attr_accessible(:depth,
                   :key,
                   :name,
                   :options,
                   :string,
-                  :url
-  attr_protected :lgt,
-                 :rgt
+                  :url) if Rails.version < '4.0.0'
+  attr_protected(:lgt,
+                 :rgt) if Rails.version < '4.0.0'
 
   # awesome nested set
   acts_as_nested_set :dependent => :destroy, :counter_cache => :children_count, :scope => :ecm_cms_navigation_id
@@ -28,7 +28,11 @@ class Ecm::Cms::NavigationItem < ActiveRecord::Base
   after_save :update_children_navigations!
 
   # default_scope
-  default_scope :order => [:ecm_cms_navigation_id, :lft]
+  if Rails.version < '4.0.0'
+    default_scope :order => [:ecm_cms_navigation_id, :lft]
+  else
+    default_scope { order(:ecm_cms_navigation_id, :lft) }
+  end
 
   # validations
   validates :key, :presence => true

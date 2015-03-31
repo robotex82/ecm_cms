@@ -1,5 +1,18 @@
 ActiveAdmin.register Ecm::Cms::Page do
-  # Menu
+  permit_params(:basename,
+                :body,
+                :ecm_cms_folder_id,
+                :ecm_cms_navigation_item_ids,
+                :ecm_cms_page_content_blocks_attributes,
+                :format,
+                :handler,
+                :layout,
+                :locale,
+                :meta_description,
+                :pathname,
+                :title) if Rails.version >= '4.0.0'
+
+
   menu :parent => Proc.new { I18n.t('ecm.cms.active_admin.menu') }.call
 
   form do |f|
@@ -66,7 +79,7 @@ ActiveAdmin.register Ecm::Cms::Page do
     end
     column :created_at
     column :updated_at
-    default_actions
+    ActiveAdmin::VERSION[0] < '1' ? default_actions : actions
   end
 
   show do

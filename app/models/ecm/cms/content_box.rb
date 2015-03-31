@@ -7,7 +7,7 @@ module Ecm::Cms
                                            :foreign_key => 'ecm_cms_content_box_id'
 
     # attributes
-    attr_accessible :name
+    attr_accessible(:name) if Rails.version < '4.0.0'
 
     # validations
     validates :name, :presence => true,

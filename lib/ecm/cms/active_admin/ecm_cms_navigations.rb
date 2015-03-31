@@ -1,6 +1,10 @@
 include ActiveAdmin::AwesomeNestedSet::Helper
 
 ActiveAdmin.register Ecm::Cms::Navigation do
+  permit_params(:locale,
+                :name,
+                :slug) if Rails.version < '4.0.0'
+                  
   # Filters
   filter :locale, :as => :select, :collection => I18n.available_locales.map(&:to_s)
   filter :name
@@ -21,7 +25,7 @@ ActiveAdmin.register Ecm::Cms::Navigation do
     selectable_column
     column :name
     column :locale
-    default_actions
+    ActiveAdmin::VERSION[0] < '1' ? default_actions : actions
   end
 
   show do

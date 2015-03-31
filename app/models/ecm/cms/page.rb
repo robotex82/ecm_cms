@@ -17,7 +17,7 @@ module Ecm::Cms
              :inverse_of => :ecm_cms_page          
 
     # attributes
-    attr_accessible :basename,
+    attr_accessible(:basename,
                     :body,
                     :ecm_cms_folder_id,
                     :ecm_cms_navigation_item_ids,
@@ -28,7 +28,7 @@ module Ecm::Cms
                     :locale,
                     :meta_description,
                     :pathname,
-                    :title
+                    :title) if Rails.version < '4.0.0'
     accepts_nested_attributes_for :ecm_cms_page_content_blocks, :allow_destroy => true
 
     # callbacks

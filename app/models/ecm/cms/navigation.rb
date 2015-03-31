@@ -8,9 +8,9 @@ class Ecm::Cms::Navigation < ActiveRecord::Base
            :foreign_key => 'ecm_cms_navigation_id'
 
   # attributes
-  attr_accessible :locale,
+  attr_accessible(:locale,
                   :name,
-                  :slug
+                  :slug) if Rails.version < '4.0.0'
 
   # validations
   validates :locale, :inclusion => I18n.available_locales.map(&:to_s),
