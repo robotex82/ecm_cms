@@ -22,7 +22,7 @@ module Ecm
       end
 
       def base_controller=(base_controller)
-        @@base_controller = base_controller.constantize
+        @@base_controller = base_controller
       end
 
       def default_handlers=(default_handlers)

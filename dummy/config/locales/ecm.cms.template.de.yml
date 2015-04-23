@@ -1,0 +1,22 @@
+---
+de:
+  activerecord:
+    models:
+      ecm/cms/template:
+        one: Vorlage
+        other: Vorlagen
+    attributes:
+      ecm/cms/template:
+        basename: Name
+        body: Inhalt
+        created_at: Erstellt am
+        ecm_cms_folder_id: Ordner
+        ecm_cms_folder: Ordner
+        filename: Dateiname
+        format: Format
+        handler: Handler
+        layout: Layout
+        locale: Sprache
+        pathname: Pfad
+        updated_at: Aktualsiert am
+

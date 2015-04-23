@@ -19,12 +19,12 @@ module Ecm
         end
 
         context 'sets default handler on initialization' do
-          its(:handler) { should eq(Ecm::Cms::Configuration.default_handlers[:page].to_s) }
+          it { expect(subject.handler).to eq(Ecm::Cms::Configuration.default_handlers[:page].to_s) }
         end
 
         context 'sets default locale on initialization' do
           before(:each) { I18n.locale = :de }
-          its(:locale) { should eq(I18n.locale.to_s) }
+          it { expect(subject.locale).to eq(I18n.locale.to_s) }
         end
       end
 
@@ -46,13 +46,13 @@ module Ecm
         # it { should validate_presence_of :pathname }
         it { should validate_uniqueness_of(:basename).scoped_to([:pathname, :locale, :format, :handler]) }
 
-        it { should ensure_inclusion_of(:format).in_array(Mime::SET.symbols.map(&:to_s)) }
+        it { should validate_inclusion_of(:format).in_array(Mime::SET.symbols.map(&:to_s)) }
         it { should_not allow_value('foo').for(:format) }
 
-        it { should ensure_inclusion_of(:handler).in_array(ActionView::Template::Handlers.extensions.map(&:to_s)) }
+        it { should validate_inclusion_of(:handler).in_array(ActionView::Template::Handlers.extensions.map(&:to_s)) }
         it { should_not allow_value('foo').for(:handler) }
 
-        it { should ensure_inclusion_of(:locale).in_array(I18n.available_locales.map(&:to_s)) }
+        it { should validate_inclusion_of(:locale).in_array(I18n.available_locales.map(&:to_s)) }
         it { should_not allow_value('foo').for(:locale) }
 
         # TODO: Validate that basename does not begin with an underscore

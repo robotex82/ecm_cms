@@ -1,0 +1,26 @@
+---
+en:
+  activerecord:
+    models:
+      ecm/cms/page:
+        one: page
+        other: pages
+    attributes:
+      ecm/cms/page:
+        basename: name
+        body: body
+        created_at: created at
+        ecm_cms_folder_id: folder
+        ecm_cms_folder: folder
+        ecm_cms_navigation_items: navigation items
+        ecm_cms_navigation_item_ids: navigation items
+        filename: filename
+        format: format
+        handler: handler
+        layout: layout
+        locale: language
+        meta_description: meta description
+        pathname: path
+        title: title
+        updated_at: updated at
+

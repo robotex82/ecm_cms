@@ -15,8 +15,8 @@ Gem::Specification.new do |s|
 
   s.files = Dir['{app,config,db,lib}/**/*'] + ['MIT-LICENSE', 'Rakefile', 'README.rdoc']
 
-  s.add_dependency 'rails', '> 3.2.0', '< 5.0.0'
-  s.add_dependency 'active_admin-awesome_nested_set', '~> 0.0.7'
+  s.add_dependency 'rails', '>= 3.2.0', '< 5.0.0'
+#  s.add_dependency 'active_admin-awesome_nested_set', '~> 0.0.7'
   s.add_dependency 'awesome_nested_set'
   s.add_dependency 'draper'
 #  s.add_dependency 'i18n_routing'
@@ -42,15 +42,18 @@ Gem::Specification.new do |s|
   s.add_development_dependency 'twitter-bootstrap-rails'
 
   # Tests
+  s.add_development_dependency 'appraisal'
   s.add_development_dependency 'capybara'
   s.add_development_dependency 'rspec-rails'
   s.add_development_dependency 'shoulda-matchers'
+  s.add_development_dependency 'test-unit', '~> 3.0'
   s.add_development_dependency 'factory_girl_rails', '~> 1.0'
+  s.add_development_dependency 'wwtd'
 
   # Test automation
   s.add_development_dependency 'rb-inotify', '~> 0.9'
   # See gemfile for a patched version, for engine support.
-  # s.add_development_dependency 'guard-rails'
+  s.add_development_dependency 'guard-rails'
   s.add_development_dependency 'guard-rspec'
   s.add_development_dependency 'guard-bundler'
 end

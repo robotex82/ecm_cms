@@ -1,3 +1,5 @@
+require 'ecm/cms/database_template'
+
 class Ecm::Cms::Partial < ActiveRecord::Base
   self.table_name = 'ecm_cms_partials'
 

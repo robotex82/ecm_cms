@@ -1,6 +1,6 @@
-class Ecm::Cms::PageController < Ecm::Cms::Configuration.base_controller
+class Ecm::Cms::PageController < Ecm::Cms::Configuration.base_controller.constantize
   # inject locale to params and vice versa
-  include RailsTools::I18nController
+  include RailsTools::I18nController if Rails.version < '4.0.0'
 
   # add the page resolver
   include Ecm::Cms::ControllerExtensions::PageResolver

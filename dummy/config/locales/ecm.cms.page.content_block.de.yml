@@ -1,0 +1,15 @@
+---
+de:
+  activerecord:
+    models:
+      ecm/cms/page/content_block:
+        one: Content Block
+        other: Content Blöcke
+    attributes:
+      ecm/cms/page/content_block:
+        body: Inhalt
+        created_at: Erstellt am
+        ecm_cms_page: Seite
+        ecm_cms_content_box: Content Box
+        updated_at: Aktualisiert am
+

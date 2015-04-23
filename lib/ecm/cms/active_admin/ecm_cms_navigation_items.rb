@@ -1,10 +1,14 @@
 ActiveAdmin.register Ecm::Cms::NavigationItem do
   permit_params(:depth,
+                :ecm_cms_navigation_id,
+                :ecm_cms_page_id,
+                :id,
                 :key,
                 :name,
                 :options,
+                :parent_id,
                 :string,
-                :url) if Rails.version < '4.0.0'
+                :url) if Rails.version >= '4.0.0'
 
   sortable_tree_member_actions
 

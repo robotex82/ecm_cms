@@ -68,12 +68,16 @@ YAML
 
           it 'should recognize navigation item data' do
             importer = Ecm::Cms::Importers::NavigationItem.new(@yaml)
-            importer.navigation_items.size.should eq(6)
+            ni = importer.navigation_items
+p importer.inspect            
+            ni.size.should eq(6)
           end
 
           it 'should build valid navigation items' do
             importer = Ecm::Cms::Importers::NavigationItem.new(@yaml)
-            importer.navigation_items.first.should be_valid
+            ni = importer.navigation_items
+p importer.inspect
+            ni.first.should be_valid
           end
         end
 

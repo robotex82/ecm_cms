@@ -15,9 +15,7 @@ module Ecm
 
         def create_navigation_items
           built_navigation_items = []
-          @yaml.each do |navigation_locale, navigation|
-p navigation_locale
-p navigation          
+          @yaml.each do |navigation_locale, navigation|     
             navigation.each do |navigation_name, navigation_items_attributes|
               n = find_or_create_navigation(navigation_locale, navigation_name)
               built_navigation_items << create_navigation_items_for_navigation(n, navigation_items_attributes)

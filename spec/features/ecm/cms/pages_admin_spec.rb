@@ -64,7 +64,7 @@ feature 'Ecm::Cms::Page admin' do
     end # scenario
 
     scenario 'should have the status code 200' do
-      page.status_code.should eq(200)
+      expect(page.status_code).to eq(200)
     end # scenario
 
     describe 'when filling the form correctly' do
@@ -74,11 +74,11 @@ feature 'Ecm::Cms::Page admin' do
       end
 
       scenario 'should have created a record' do
-        @resource_class.count.should eq(@resource_count + 1)
+        expect(@resource_class.count).to eq(@resource_count + 1)
       end # scenario
 
       scenario 'should have the status code 200' do
-        page.status_code.should eq(200)
+        expect(page.status_code).to eq(200)
       end # scenario
     end # describe 'when filling the form correctly'
   end # describe 'new'
@@ -90,7 +90,7 @@ feature 'Ecm::Cms::Page admin' do
     end
 
     scenario 'should have the status code 200' do
-      page.status_code.should eq(200)
+      expect(page.status_code).to eq(200)
     end # scenario
   end # describe 'show'
 

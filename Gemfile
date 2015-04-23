@@ -15,3 +15,5 @@ gem "jquery-rails"
 
 # To use debugger
 # gem 'ruby-debug'
+gem 'active_admin-awesome_nested_set', github: 'robotex82/active_admin-awesome_nested_set', branch: 'feature/rails-4-2'
+# path: '../active_admin-awesome_nested_set'

@@ -3,7 +3,7 @@ include ActiveAdmin::AwesomeNestedSet::Helper
 ActiveAdmin.register Ecm::Cms::Navigation do
   permit_params(:locale,
                 :name,
-                :slug) if Rails.version < '4.0.0'
+                :slug) if Rails.version >= '4.0.0'
                   
   # Filters
   filter :locale, :as => :select, :collection => I18n.available_locales.map(&:to_s)

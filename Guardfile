@@ -1,9 +1,9 @@
-guard 'rails', :rails_root => 'spec/dummy' do
-  watch('Gemfile.lock')
-  watch(%r{^(config|lib)/.*(^\.rake)})
-end
+#guard 'rails', :rails_root => 'dummy' do
+#  watch('Gemfile.lock')
+#  watch(%r{^(config|lib)/.*(^\.rake)})
+#end
 
-guard 'rspec' do
+guard 'rspec', cmd: 'appraisal rails-3 rspec spec' do
   watch(%r{^spec/.+_spec\.rb$})
   watch(%r{^lib/(.+)\.rb$})     { |m| "spec/lib/#{m[1]}_spec.rb" }
   watch('spec/spec_helper.rb')  { "spec" }

@@ -6,7 +6,7 @@ ActiveAdmin.register Ecm::Cms::Template do
                 :handler,
                 :layout,
                 :locale,
-                :pathname) if Rails.version < '4.0.0'
+                :pathname) if Rails.version >= '4.0.0'
                   
   # Menu
   menu :parent => Proc.new { I18n.t('ecm.cms.active_admin.menu') }.call

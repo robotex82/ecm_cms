@@ -1,6 +1,8 @@
 require 'spec_helper'
 
 describe "routing to pages" do
+  # routes { Ecm::Cms::Engine.routes }
+
   it "routes /foo to ecm/cms/page#respond" do
     expect(:get => "/en/foo").to route_to(
       :i18n_locale => "en",

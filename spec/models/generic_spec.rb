@@ -25,8 +25,8 @@ describe "ActiveRecord::Base models" do
 
       it "should save with valid attributes" do
         instance = FactoryGirl.create(model.to_s.tableize.singularize.underscore.gsub( '/', '_'))
-        instance.save.should be_true
-        instance.should be_persisted
+        expect(instance.save).to eq(true)
+        expect(instance.persisted?).to eq(true)
       end
     end
   end

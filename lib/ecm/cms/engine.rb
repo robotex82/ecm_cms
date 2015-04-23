@@ -1,6 +1,16 @@
 module Ecm
   module Cms
     class Engine < ::Rails::Engine
+      # config.eager_load_paths += Dir["#{config.root}/lib/**/"]
+      
+      config.app_generators do |c|
+        c.test_framework :rspec, :fixture => true,
+                                 :fixture_replacement => nil
+
+        c.integration_tool :rspec
+        c.performance_tool :rspec
+      end
+
       # active admin
       initializer :ecm_cms_engine do
         ::ActiveAdmin.setup do |config|

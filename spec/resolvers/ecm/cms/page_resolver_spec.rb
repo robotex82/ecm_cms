@@ -24,11 +24,11 @@ module Ecm
 
         it { subject.should respond_to :find_templates }
         it "should return an Array" do
-          subject.find_templates(*@valid_args).should be_a(Array)
+          expect(subject.find_templates(*@valid_args)).to be_a(Array)
         end
 
         it "should not return templates if it searches a partial" do
-          subject.find_templates(*@partial_args).should be_empty
+          expect(subject.find_templates(*@partial_args)).to be_empty
         end
 
         context "page lookup"do
@@ -49,7 +49,7 @@ module Ecm
               false,
               { :handlers => [:builder, :erb], :locale => [:de], :formats => [:html] }
             ]
-            subject.find_templates(*@args).size.should eq(1)
+            expect(subject.find_templates(*@args).size).to eq(1)
           end
         end
 
@@ -71,7 +71,7 @@ module Ecm
               false,
               { :handlers => [:builder, :erb], :locale => [:de], :formats => [:html] }
             ]
-            subject.find_templates(*@args).size.should eq(1)
+            expect(subject.find_templates(*@args).size).to eq(1)
           end
         end
 
@@ -94,7 +94,7 @@ module Ecm
               false,
               { :formats => [ :html ], :locale => [ :en, :de ], :handlers => [ :textile, :erb, :arb, :builder ] }
             ]
-            subject.find_templates(*@args).size.should eq(1)
+            expect(subject.find_templates(*@args).size).to eq(1)
           end
         end
       end
@@ -110,7 +110,7 @@ module Ecm
             page.title    = 'Foo Page'
           end
           details =  { :handlers => [:builder, :erb], :locale => [:de], :formats => [:html] }
-          subject.initialize_template(record, details).should be_a(::ActionView::Template)
+          expect(subject.initialize_template(record, details)).to be_a(::ActionView::Template)
         end
       end
 
@@ -136,11 +136,11 @@ module Ecm
             [ 1, 2, 3, 4, 5 ]
           ]
         end
-        it { subject.should respond_to :normalize_array }
+        it { expect(subject).to respond_to :normalize_array }
         it "should convert all items to strings" do
           result = subject.normalize_array(@valid_args)
           result.each do |r|
-            r.should be_a(String)
+            expect(r).to be_a(String)
           end
         end
       end
@@ -165,19 +165,19 @@ module Ecm
         end
 
         it "should add a content for block for the title" do
-          subject.build_source(@page).should include("<% content_for :title do %>", "bar", "<% end %>")
+          expect(subject.build_source(@page)).to include("<% content_for :title do %>", "bar", "<% end %>")
         end
 
         it "should add a content for block for the meta description" do
-          subject.build_source(@page).should include("<% content_for :meta_description do %>", "baz", "<% end %>")
+          expect(subject.build_source(@page)).to include("<% content_for :meta_description do %>", "baz", "<% end %>")
         end
 
         it "should add a content for block for the associated sidebar content block" do
-          subject.build_source(@page).should include("<% content_for :footer do %>", "sidebar content", "<% end %>")
+          expect(subject.build_source(@page)).to include("<% content_for :footer do %>", "sidebar content", "<% end %>")
         end
 
         it "should add a content for block for the associated footer content block" do
-          subject.build_source(@page).should include("<% content_for :footer do %>", "footer content", "<% end %>")
+          expect(subject.build_source(@page)).to include("<% content_for :footer do %>", "footer content", "<% end %>")
         end
       end
     end
