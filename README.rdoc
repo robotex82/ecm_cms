@@ -40,11 +40,11 @@ Add the routes to your routing file:
 
   # config/routes.rb:
   localized(I18n.available_locales) do
-    scope "/:i18n_locale", :constraints => {:i18n_locale => /#{I18n.available_locales.join('|')}/} do 
+    scope "/:i18n_locale", :constraints => {:i18n_locale => /#{I18n.available_locales.join('|')}/} do
       # ECM CMS
       Ecm::Cms::Routing.routes(self)
-    end  
-  end  
+    end
+  end
   match "/", :to => redirect("/#{I18n.locale}")
 
 = Optional: Generating example/default data
@@ -54,6 +54,18 @@ There is a task to prepopulate your database tables with example data.
 Warning: *RUNNING THIS WILL DELETE ALL OF YOUR CMS DATA AND REPLACE IT WITH EXAMPLE DATA!*
 
   > rake ecm:cms:db:populate!
+
+= Linking to pages
+
+    <%= link_to 'My Page', page_path(i18n_locale: I18n.locale, page: 'my-page') %>
+
+= Using partials form the database in other controllers
+
+    # app/controllers/application_controller.rb
+    class ApplicationController < ActionController::Base
+      prepend_view_path ::Ecm::Cms::PartialResolver.instance
+      ...
+    end
 
 = License
 
