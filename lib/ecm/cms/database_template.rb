@@ -54,7 +54,8 @@ module Ecm
       end
 
       def clear_resolver_cache
-        Ecm::Cms::PageResolver.instance.clear_cache
+        klass = "#{self.class.name}Resolver"
+        klass.constantize.instance.clear_cache
       end
 
       def set_defaults
